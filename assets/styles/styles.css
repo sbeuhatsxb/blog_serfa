@@ -1,0 +1,272 @@
+/* Initiaiser les marges à zéro */
+*{
+	margin:0;
+	padding:0;
+}
+.error{
+	border : 1px solid red;
+	background-color : rgba(255, 0, 0, 0.5);
+}
+.valid{
+	border : 1px solid green;
+	background-color : rgba(0, 128, 0, 0.5);
+}
+
+div.valid, div.error{
+	color : #FFF;
+	padding:20px;
+}
+
+/* Mise en forme par défaut des listes et liens */
+ul{
+	list-style: none; /* suppression des puces */
+}
+
+a{
+	text-decoration: none; /* pas de soulignement */
+	color : #433191; /* couleur */
+}
+
+table
+{
+	border-collapse: collapse;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+	padding: 20px;
+	border: 1px solid black;
+}
+
+/* Le texte est aligné dans le header */
+header{
+	text-align:center;
+	position:relative;
+}
+
+/* Taille du logo */
+header > img{
+	width:75%;
+}
+
+/* Titre du site */ 
+header h1{
+	text-transform:uppercase;
+}
+
+/* position absolue des éléments de connection et du menu */
+#user, nav {
+	position:absolute;
+	top:10px;
+}
+
+/* Les éléments de connection sont à droite */
+#user{
+	right:10px;
+}
+
+/* Le menu de navigation est à gauche */
+nav {
+	left:10px;
+}
+
+/* Mise en forme du h2 */
+h2{
+	margin:25px;
+	color:#433191;
+}
+
+main{
+	padding:20px;
+}
+
+/* Mise en forme du premier paragraphe */
+body main h2 + p {
+	border : 1px solid #433191;
+	padding:20px;
+	background-color: rgba(67, 49, 145, 0.5);
+	color:#FFF;
+	font-weight:bold;
+}
+
+/* Mise en forme des articles */
+article{
+	position:relative;
+	margin:20px;
+}
+
+/* Taille des images des articles */
+article img{
+	width:100%;
+	border-radius: 50%;
+}
+
+/* Mise en forme du contenu */
+article div{
+	transition:2s;
+    position: absolute;
+    bottom: 10px;
+	left:0px;
+	right:0px;
+	padding:10px;
+	background:rgba(197, 186, 245, 0.8);
+	overflow:hidden;
+}
+
+/* Pied de page */
+footer{
+	text-align:center;
+	background-color:#c5baf5;
+	padding:10px;
+}
+
+/* Par défaut le menu est caché */
+nav ul{
+	display : none;
+}
+
+/**** Formulaire de contact ****/
+/* image du captcha */
+img#captcha{
+	width:100px;
+}
+
+#map{
+	display:none;
+}
+
+form p{
+	margin : 12px 0;
+	padding-left:20px;
+}
+
+form label{
+	width:90%;
+	display :inline-block;
+}
+form input[type="text"], form input[type="email"], form input[type="tel"]{
+	width:80%;
+}
+
+form textarea{
+	display : block;	
+	width:80%;
+	height:100px;
+}
+
+iframe{
+	width: 100%;
+    min-height: 500px;
+    border: none;
+}
+
+/***** Responsive *****/
+@media screen and (min-width:768px){
+	header{
+		text-align:left;
+	}
+	header img{
+		width:35%;
+	}
+	header h1{
+		position:absolute;
+		top: 150px;
+		right: 50px;
+	}
+	nav img{
+		display:none;
+	}
+	nav ul{
+		display:block;
+		text-align:center; /* Alignement  des éléments */
+	}
+
+	nav ul li {
+		display: inline-block; /* chaque élément l'un à côté de l'autre */
+		margin: 0px 15px; /* espacement des éléments */
+		padding : 10px;
+	}
+
+	nav li a{
+		color: #717171; /* couleur du texte */
+		font-size: 18px; /* taille du texte */
+		letter-spacing: 0.325px; /* espacement des lettres */
+		line-height: 1.53;	/* hauteur des lignes */
+		text-transform: uppercase; /* texte en majuscule */
+	}	
+	nav li.active{
+		background-color : #717171;
+	}
+	nav li.active a{
+		color : #FFF;
+	}
+	
+	h2{
+		text-align:center;
+	}
+	article{
+		width:44%;
+		display:inline-block;
+	}
+	form label{
+		width:250px;
+	}
+	form textarea{
+		height:100px;
+	}
+	form input[type="text"], form input[type="email"], form input[type="tel"]{
+		width:50%;
+	}
+
+	form #rgpd + label{
+		width:200px;
+	}	
+}
+
+@media screen and (min-width:900px){
+	header img{
+		width:25%;
+	}
+	header h1{
+		top: 50px;
+	}
+	nav{
+		right: 50px;
+		top: 120px;
+		left: auto;
+	}
+	article div{
+		width:50%;
+		visibility:visible;
+		position:relative;
+		background-color:transparent;
+	}
+	article img, article div{
+		width:45%;
+		display:inline-block;
+		vertical-align: top;
+	}
+	body{
+		width:900px;
+		margin:auto;
+	}
+	form[name="contactForm"], #map{
+		display:inline-block;
+		width:47%;
+	}
+
+	#map{
+		padding:20px;
+		vertical-align:top;
+	}
+	form label{
+		width:150px;
+	}
+	form textarea{
+		height:100px;
+	}
+
+	form #rgpd + label{
+		width:300px;
+	}
+	
+}

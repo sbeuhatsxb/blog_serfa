@@ -3,7 +3,11 @@ include "includes/header.php";
 include "src/sql_queries.php";
 
 if (isset($_GET["password"])) {
-    echo '<p style="color: green">Le mot de passe a été modifié</p>';
+    if ($_GET["password"] == 1) {
+        echo '<p style="color: green">Le mot de passe a été modifié</p>';
+    } else {
+        echo '<p style="color: red">Les mots de passe ne correspondent pas</p>';
+    }
 }
 
 if (isset($_GET["hashed"])) {

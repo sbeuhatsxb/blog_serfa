@@ -50,8 +50,13 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
         $updateUser = "UPDATE users SET user_pwd = ?, hashed = ? WHERE user_mail = '$email'";
         $pdo->prepare($updateUser)->execute([$hash, 1]);
+        header("Location: ../user_infos.php?password=1");
+        exit();
+    } else {
+        header("Location: ../user_infos.php?password=0");
+        exit();
     }
-    echo "<p>'Le mot de passe est modifié'</p>";
+
 } else {
     exit();
 }

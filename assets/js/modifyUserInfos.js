@@ -1,4 +1,3 @@
-
 //Attente de la fin du chargement du DOM
 window.addEventListener("DOMContentLoaded", (event) => {
     //On cache le formulaire de changement de mot de passe par défaut
@@ -80,6 +79,5 @@ function reply_click(clicked_id) {
     xhr.open('POST', 'src/update_user.php', true);
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     xhr.send(data);
-
 }
 

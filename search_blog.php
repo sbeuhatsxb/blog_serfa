@@ -6,23 +6,23 @@ $content = $_POST["keywords"];
 $author = $_POST["author"];
 
 //Si la période est sélectionnée
-if($_POST["period"] == 1){
+if ($_POST["period"] == 1) {
     $startdate = $_POST["startdate"];
     $enddate = $_POST["enddate"];
 
     //Si l'une des des dates est remplie
-    if(!empty($startdate) || !empty($enddate)){
+    if (!empty($startdate) || !empty($enddate)) {
         //On continue la requête SQL
-        $querySearchInBlog.= ' AND article_createdate';
+        $querySearchInBlog .= ' AND article_createdate';
         //Si les deux dates sont renseignées
-        if(!empty($startdate) && !empty($enddate)){
-            if(new DateTime($startdate) <=  new DateTime($enddate)){
-                $querySearchInBlog.= ' BETWEEN :startdate AND :enddate';
+        if (!empty($startdate) && !empty($enddate)) {
+            if (new DateTime($startdate) <= new DateTime($enddate)) {
+                $querySearchInBlog .= ' BETWEEN :startdate AND :enddate';
             }
-        //Si la date de début est renseignée
-        } elseif (!empty($startdate) && empty($enddate)){
-            $querySearchInBlog.= ' >= :startdate';
-        //Si la date de fin est renseignée
+            //Si la date de début est renseignée
+        } elseif (!empty($startdate) && empty($enddate)) {
+            $querySearchInBlog .= ' >= :startdate';
+            //Si la date de fin est renseignée
         } else {
             $querySearchInBlog .= ' <= :$enddate';
         }
@@ -38,14 +38,14 @@ if($_POST["period"] == 1){
     //Si la date seule est sélectionnée
 } else {
     $date = $_POST["date"];
-    $querySearchInBlog.= ' AND article_createdate = :date';
+    $querySearchInBlog .= ' AND article_createdate = :date';
     $querySearchInBlogPrep = $pdo->prepare($querySearchInBlog);
     $querySearchInBlogPrep->bindValue(':date', $date, PDO::PARAM_STR);
 
 }
 
 $querySearchInBlogPrep->bindValue(':author', $author, PDO::PARAM_STR);
-$querySearchInBlogPrep->bindValue(':content', "%".$content."%", PDO::PARAM_STR);
+$querySearchInBlogPrep->bindValue(':content', "%" . $content . "%", PDO::PARAM_STR);
 $querySearchInBlogPrep->execute();
 $results = $querySearchInBlogPrep->fetchAll();
 
@@ -53,7 +53,7 @@ echo '
 <main>
     <h2>Recherche</h2>
     <p>Page affichant les résultats de la recherche</p>';
-    include "includes/blogDisplay.php";
+include "includes/blogDisplay.php";
 echo '</main>';
 include "includes/footer.php" ?>
 </body>

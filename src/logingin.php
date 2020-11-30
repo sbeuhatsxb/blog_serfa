@@ -11,14 +11,14 @@ $queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
 $queryUserEmailPrep->execute();
 $results = $queryUserEmailPrep->fetch();
 
-if($results){
- //Le compte existe
+if ($results) {
+    //Le compte existe
 
     //Retrait du flag de la comparaison des hashes
-    $truePassword = trim($results["user_pwd"],"**hashed**|");
+    $truePassword = trim($results["user_pwd"], "**hashed**|");
 
     $hash = password_hash($truePassword, PASSWORD_DEFAULT, ['cost' => 15]);
-    if (password_verify($password, $results["user_pwd"]) || $password == $results["user_pwd"]){
+    if (password_verify($password, $results["user_pwd"]) || $password == $results["user_pwd"]) {
         session_start();
         $_SESSION['user'] = $email;
         $_SESSION['start'] = time();

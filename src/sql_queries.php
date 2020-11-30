@@ -7,7 +7,6 @@ $querySearchInBlog = 'SELECT * FROM articles
     INNER JOIN users ON articles.article_creator = users.user_id
      WHERE users.user_name = :author
      AND article_content LIKE :content
-     
     ';
 
 $queryUsers = 'SELECT user_name FROM users';
@@ -19,5 +18,3 @@ $queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
 $queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 
 $queryGetUserPwd = 'SELECT user_pwd FROM users WHERE user_mail = :email';
-
-

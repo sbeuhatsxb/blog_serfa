@@ -2,7 +2,7 @@
 include "../includes/header.php";
 include "sql_queries.php";
 
-if(isset($_POST["hash"]) && $_POST["hash"] == 1){
+if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
     $email = $_SESSION["user"];
     $queryGetUserPwdPrep = $pdo->prepare($queryGetUserPwd);
     $queryGetUserPwdPrep->bindValue(':email', $email, PDO::PARAM_STR);
@@ -14,7 +14,7 @@ if(isset($_POST["hash"]) && $_POST["hash"] == 1){
 
     $flag = "**hashed**|";
 
-    if(strpos($recordedPassword, $flag)){
+    if (strpos($recordedPassword, $flag)) {
         //Le mot de passe est déjà haché
         echo "<script>alert('Le mot de passe est déjà haché')</script>";
     } else {
@@ -27,7 +27,7 @@ if(isset($_POST["hash"]) && $_POST["hash"] == 1){
 
 }
 
-if(isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["hash"])) {
+if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["hash"])) {
     $value = $_POST["value"];
     $field = $_POST["id"];
     $email = $_SESSION["user"];
@@ -36,14 +36,14 @@ if(isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["hash
 
     $pdo->prepare($updateUser)->execute([$value]);
     echo "<script>alert('Information mise à jour')</script>";
-} elseif(isset($_POST["password"]) && isset($_SESSION["user"])) {
+} elseif (isset($_POST["password"]) && isset($_SESSION["user"])) {
 
     //Comparaison des deux mots de passes saisis
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirmPassword"];
     $email = $_SESSION["user"];
 
-    if ($password == $confirmPassword){
+    if ($password == $confirmPassword) {
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
         //Rajout du flag hash
         $hash = "**hashed**|" . $hash;

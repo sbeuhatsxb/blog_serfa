@@ -9,13 +9,13 @@ $queryBlogPrep->bindValue(':limit', 4, PDO::PARAM_INT);
 $queryBlogPrep->execute();
 $results = $queryBlogPrep->fetchAll();
 
-if(isset($_SESSION["user"])){
+if (isset($_SESSION["user"])) {
     $userConnected = $_SESSION["user"];
-    echo '<p>Bienvenue : '.$userConnected.'</p>';
+    echo '<p>Bienvenue : ' . $userConnected . '</p>';
 }
-if(isset($_GET["user_created"])){
+if (isset($_GET["user_created"])) {
     $userCreated = $_GET["user_created"];
-    echo '<p>Utilisateur créé : '.$userCreated.'</p>';
+    echo '<p>Utilisateur créé : ' . $userCreated . '</p>';
 }
 
 ?>

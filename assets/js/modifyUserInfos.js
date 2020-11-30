@@ -1,3 +1,10 @@
+
+//Attente de la fin du chargement du DOM
+window.addEventListener("DOMContentLoaded", (event) => {
+    //On cache le formulaire de changement de mot de passe par défaut
+    document.getElementById("formHidden").style.display = "none";
+});
+
 function reply_click(clicked_id) {
     var getHttpRequest = function () {
         var httpRequest = false;
@@ -32,7 +39,6 @@ function reply_click(clicked_id) {
         }
     }
 
-
     //On récupère l'id du bouton sur lequel on a cliqué
     var id = document.getElementById(clicked_id);
     //On enregistre l'email du l'utilsateur pour send AJAX
@@ -42,10 +48,11 @@ function reply_click(clicked_id) {
     var oldvalue = id.innerText;
     //On fait disparaitre le bouton
     id.style.display = "none";
-    //On demande à l'utilisateur sa nouvelle valeur
-    var newname = prompt("Nouvelle valeur");
+
     //Si le bouton n'est pas celui du mot de passe :
-    if(clicked_id != 'user_pwd'){
+    if(clicked_id != 'pwd'){
+        //On demande à l'utilisateur sa nouvelle valeur
+        var newname = prompt("Nouvelle valeur");
         //Si le nouveau nom est vide on garde l'ancien
         if (newname == "") {
             id.innerText = oldvalue;
@@ -60,22 +67,15 @@ function reply_click(clicked_id) {
         }
         //Sinon cela concerne le mot de passe
     } else {
-        //Si le mot de passe n'est pas vide sinon
-        if (newname != ""){
-            //TODO : Hasher le mot de passe -->value
-            var hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 15});
-            hashObj.update(newname);
-            var hash = hashObj.getHash("HEX");
-            pwdObj.value = hash;
-            console.log(pwdObj.value);
-            //Envoi du mot de passe
-            var data = new FormData();
-            data.append('value', newname)
-            data.append('id', clicked_id)
-            data.append('email', email.innerText)
-        } else {
-            alert("Le mot de passe n'a pas été modifié")
-        }
+        //On affiche le formulaire
+        document.getElementById("formHidden").style.display = "block";
+    }
+
+    //Si le bouton du formaire est coché, on envoie l'email du user pour vérif
+    if(clicked_id == 'pwdSbumited') {
+        var data = new FormData();
+        data.append('email', email.innerText)
+        data.append('motdepasse', 1)
     }
 
     //On réaffiche le bouton

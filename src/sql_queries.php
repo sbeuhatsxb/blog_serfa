@@ -17,4 +17,4 @@ $queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
 
 $queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 
-$queryGetUserPwd = 'SELECT user_pwd FROM users WHERE user_mail = :email';
+$queryGetUserPwd = 'SELECT user_pwd, hashed FROM users WHERE user_mail = :email';

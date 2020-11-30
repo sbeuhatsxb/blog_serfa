@@ -32,6 +32,7 @@ function reply_click(clicked_id) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 xhr.responseText; // contient le résultat de la page
+                console.log(xhr.responseText);
             } else {
                 // Le serveur a renvoyé un status d'erreur
             }

@@ -1,4 +1,6 @@
 <?php
+//namespace App;
+
 include "includes/header.php";
 include "src/sql_queries.php";
 

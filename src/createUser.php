@@ -7,8 +7,7 @@ $email = $_POST["mail"];
 $password = $_POST["passwd"];
 $confPassword = $_POST["confirmPwd"];
 
-$hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
-$hash = "**hashed**|" . $hash;
+$hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
 
 $data = [
     'name' => $name,

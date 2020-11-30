@@ -2,28 +2,31 @@
 include "../includes/header.php";
 include "sql_queries.php";
 
+
 if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
+
     $email = $_SESSION["user"];
     $queryGetUserPwdPrep = $pdo->prepare($queryGetUserPwd);
     $queryGetUserPwdPrep->bindValue(':email', $email, PDO::PARAM_STR);
     $queryGetUserPwdPrep->execute();
-    $result = $queryGetUserPwdPrep->fetch();
+    $results = $queryGetUserPwdPrep->fetch();
 
-    //On enregistre le
-    $recordedPassword = $result["user_pwd"];
+    if (isset($results)){
+        //Si le mot de passe n'est pas hashé
+        if($results["hashed"] == 0){
+            //On enregistre le
+            $recordedPassword = $results["user_pwd"];
 
-    $flag = "**hashed**|";
-
-    if (strpos($recordedPassword, $flag)) {
-        //Le mot de passe est déjà haché
-        echo "<script>alert('Le mot de passe est déjà haché')</script>";
-    } else {
-        $hash = password_hash($recordedPassword, PASSWORD_DEFAULT, ['cost' => 15]);
-        $hash = $flag . $hash;
-        $updateUser = "UPDATE users SET user_pwd = ? WHERE user_mail = '$email'";
-        $pdo->prepare($updateUser)->execute([$hash]);
-        echo "<script>alert('Le mot de passe est haché')</script>";
+            $hash = password_hash($recordedPassword, PASSWORD_DEFAULT, ['cost' => 10]);
+            $updateUser = "UPDATE users SET user_pwd = ?, hashed = ? WHERE user_mail = '$email'";
+            $pdo->prepare($updateUser)->execute([$hash, 1]);
+            echo "<div>Le mot de passe est haché'</div>";
+        } else {
+            echo "<div>'Le mot de passe est déjà haché'</div>";
+        }
     }
+
+
 
 }
 
@@ -35,7 +38,7 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
     $updateUser = "UPDATE users SET $field = ? WHERE user_mail = '$email'";
 
     $pdo->prepare($updateUser)->execute([$value]);
-    echo "<script>alert('Information mise à jour')</script>";
+    echo "<p>'Information mise à jour'</p>";
 } elseif (isset($_POST["password"]) && isset($_SESSION["user"])) {
 
     //Comparaison des deux mots de passes saisis
@@ -44,14 +47,11 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
     $email = $_SESSION["user"];
 
     if ($password == $confirmPassword) {
-        $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
-        //Rajout du flag hash
-        $hash = "**hashed**|" . $hash;
-        $updateUser = "UPDATE users SET user_pwd = ? WHERE user_mail = '$email'";
-        $pdo->prepare($updateUser)->execute([$hash]);
+        $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
+        $updateUser = "UPDATE users SET user_pwd = ?, hashed = ? WHERE user_mail = '$email'";
+        $pdo->prepare($updateUser)->execute([$hash, 1]);
     }
-    header("Location: ../user_infos.php?password=1");
-    exit();
+    echo "<p>'Le mot de passe est modifié'</p>";
 } else {
     exit();
 }

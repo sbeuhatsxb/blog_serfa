@@ -1,6 +1,6 @@
 <?php
 include "includes/header.php";
-include "includes/sql_queries.php";
+include "src/sql_queries.php";
 
 //Récupération de tous les articles
 $queryBlogPrep = $pdo->prepare($queryBlog);
@@ -16,7 +16,7 @@ $userResults = $queryUsersPrep->fetchAll();
 <main>
     <h2>Les articles</h2>
     <p>Page affichant tous les articles, avec une zone de recherche sur les articles</p>
-    <form name="formSearch" method="post" action="search.php">
+    <form name="formSearch" method="post" action="search_blog.php">
         <fieldset>
             <legend>Rechercher des articles</legend>
             <p><label for="keywords">Mots clés</label><input id="keywords" type="text" name="keywords" /></p>

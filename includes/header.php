@@ -46,7 +46,7 @@ if($currentFile == "blog_serfa"){
                 <a href="create_account.php" title="Créer un compte"><i class="fas fa-user"></i></a>
             ';
         } else {
-            echo '<a href="includes/disconnectUser.php" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>|';
+            echo '<a href="src/disconnectUser.php" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>|';
 
             echo '<a href="user_infos.php" title="Voir mon profil"><i class="fas fa-user"></i></a>';
         }

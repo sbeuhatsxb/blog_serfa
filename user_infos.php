@@ -1,6 +1,6 @@
 <?php
 include "includes/header.php";
-include "includes/sql_queries.php";
+include "src/sql_queries.php";
 
 if(isset($_SESSION["user"])){
     $email = $_SESSION["user"];

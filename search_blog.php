@@ -1,6 +1,6 @@
 <?php
 include "includes/header.php";
-include "includes/sql_queries.php";
+include "src/sql_queries.php";
 
 $content = $_POST["keywords"];
 $author = $_POST["author"];

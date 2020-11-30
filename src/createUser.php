@@ -7,11 +7,13 @@ $email = $_POST["mail"];
 $password = $_POST["passwd"];
 $confPassword = $_POST["confirmPwd"];
 
+$hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
+
 $data = [
     'name' => $name,
     'firstname' => $firstname,
     'email' => $email,
-    'password' => $password,
+    'password' => $hash,
 ];
 
 if($pdo->errorCode() == '00000'){

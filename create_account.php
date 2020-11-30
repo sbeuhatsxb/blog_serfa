@@ -3,7 +3,7 @@
 <main>
     <h2>Créer un compte</h2>
     <p>Page de création de compte</p>
-    <form action="includes/createUser.php" name="formCreateAccount" method="post" >
+    <form action="src/createUser.php" name="formCreateAccount" method="post" >
         <fieldset>
             <legend>Informations utilisateur</legend>
             <p><label for="name">Nom</label><input type="text" name="name" id="name" /></p>

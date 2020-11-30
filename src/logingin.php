@@ -13,16 +13,18 @@ $results = $queryUserEmailPrep->fetch();
 
 if($results){
  //Le compte existe
-    if ($password != $results["user_pwd"]){
-        echo "Le mot de passe est erroné";
+
+    $hash = password_hash($results["user_pwd"], PASSWORD_DEFAULT, ['cost' => 15]);
+    if (password_verify($password, $results["user_pwd"])){
+        //Mauvais mot de passe
         header("Location: ../login.php?wrong_password=1");
+        exit();
     } else {
         session_start();
         $_SESSION['user'] = $email;
         $_SESSION['start'] = time();
         header("Location: ../index.php");
         exit();
-
     }
 
 } else {

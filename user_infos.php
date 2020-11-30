@@ -6,6 +6,13 @@ if(isset($_GET["password"])){
     echo '<p style="color: green">Le mot de passe a été modifié</p>';
 }
 
+if(isset($_GET["hashed"])){
+    if($_GET["hashed"] == 1){
+        echo '<p style="color: green">Le mot de passe est haché</p>';
+    } else {
+        echo '<p style="color: red">Le mot de passe est déjà haché</p>';
+    }
+}
 
 if(isset($_SESSION["user"])){
     $email = $_SESSION["user"];
@@ -32,7 +39,11 @@ if(isset($_SESSION["user"])){
                     <td><button id="user_firstname" onclick="reply_click(this.id)">&nbsp;'.$results["user_firstname"].'&nbsp;</button></td>
                 </tr>
                 <tr>
-                    <th>Password</th>
+                    <th>Hacher le mot de passe</th>
+                    <td><button id="hash" onclick="reply_click(this.id)">&nbsp;Hacher&nbsp;</button></td>
+                </tr>
+                <tr>
+                    <th>Mot de passe</th>
                     <td><button id="pwd" onclick="reply_click(this.id)">&nbsp;Modifier&nbsp;</button></td>
                 </tr>
             </tbody>

@@ -49,8 +49,11 @@ function reply_click(clicked_id) {
     //On fait disparaitre le bouton
     id.style.display = "none";
 
+    if (clicked_id == 'hash'){
+        var data = new FormData();
+        data.append('hash', 1)
     //Si le bouton n'est pas celui du mot de passe :
-    if (clicked_id != 'pwd') {
+    } else if (clicked_id != 'pwd') {
         //On demande à l'utilisateur sa nouvelle valeur
         var newname = prompt("Nouvelle valeur");
         //Si le nouveau nom est vide on garde l'ancien
@@ -63,7 +66,6 @@ function reply_click(clicked_id) {
             var data = new FormData();
             data.append('value', newname)
             data.append('id', clicked_id)
-            data.append('email', email.innerText)
         }
         //Sinon cela concerne le mot de passe
     } else {
@@ -78,7 +80,6 @@ function reply_click(clicked_id) {
     xhr.open('POST', 'src/update_user.php', true);
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     xhr.send(data);
+
 }
-
-
 

@@ -8,6 +8,7 @@ $password = $_POST["passwd"];
 $confPassword = $_POST["confirmPwd"];
 
 $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
+$hash = "**hashed**|" . $hash;
 
 $data = [
     'name' => $name,

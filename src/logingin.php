@@ -14,7 +14,10 @@ $results = $queryUserEmailPrep->fetch();
 if($results){
  //Le compte existe
 
-    $hash = password_hash($results["user_pwd"], PASSWORD_DEFAULT, ['cost' => 15]);
+    //Retrait du flag de la comparaison des hashes
+    $truePassword = trim($results["user_pwd"],"**hashed**|");
+
+    $hash = password_hash($truePassword, PASSWORD_DEFAULT, ['cost' => 15]);
     if (password_verify($password, $results["user_pwd"]) || $password == $results["user_pwd"]){
         session_start();
         $_SESSION['user'] = $email;

@@ -10,7 +10,6 @@ $querySearchInBlog = 'SELECT * FROM articles
      
     ';
 
-
 $queryUsers = 'SELECT user_name FROM users';
 
 $createUser = "INSERT INTO users (user_name, user_firstname, user_mail, user_pwd) VALUES (:name, :firstname, :email, :password)";
@@ -18,5 +17,7 @@ $createUser = "INSERT INTO users (user_name, user_firstname, user_mail, user_pwd
 $queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
 
 $queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
+
+$queryGetUserPwd = 'SELECT user_pwd FROM users WHERE user_mail = :email';
 
 

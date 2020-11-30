@@ -16,7 +16,7 @@ function reply_click(clicked_id) {
     }
 
     var xhr = getHttpRequest();
-    xhr.open('GET', 'updateUserInfos.php', true);
+    xhr.open('GET', 'src/update_user.php', true);
     // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     // On lance la requête
@@ -62,8 +62,14 @@ function reply_click(clicked_id) {
     } else {
         //Si le mot de passe n'est pas vide sinon
         if (newname != ""){
-            var data = new FormData();
             //TODO : Hasher le mot de passe -->value
+            var hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 15});
+            hashObj.update(newname);
+            var hash = hashObj.getHash("HEX");
+            pwdObj.value = hash;
+            console.log(pwdObj.value);
+            //Envoi du mot de passe
+            var data = new FormData();
             data.append('value', newname)
             data.append('id', clicked_id)
             data.append('email', email.innerText)
@@ -76,7 +82,7 @@ function reply_click(clicked_id) {
     id.style.display = "unset";
 
     var xhr = getHttpRequest();
-    xhr.open('POST', 'updateUserInfos.php', true);
+    xhr.open('POST', 'src/update_user.php', true);
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     xhr.send(data);
 }

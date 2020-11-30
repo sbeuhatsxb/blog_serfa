@@ -50,7 +50,7 @@ function reply_click(clicked_id) {
     id.style.display = "none";
 
     //Si le bouton n'est pas celui du mot de passe :
-    if(clicked_id != 'pwd'){
+    if (clicked_id != 'pwd') {
         //On demande à l'utilisateur sa nouvelle valeur
         var newname = prompt("Nouvelle valeur");
         //Si le nouveau nom est vide on garde l'ancien
@@ -58,7 +58,7 @@ function reply_click(clicked_id) {
             id.innerText = oldvalue;
         } else {
             //Sinon on remplace le texte affiché par le nouveau texte
-            id.innerText = "\xa0"+newname+"\xa0";
+            id.innerText = "\xa0" + newname + "\xa0";
             //Et on prépare les données envoyées en POST pour le traitement en BDD
             var data = new FormData();
             data.append('value', newname)
@@ -69,13 +69,6 @@ function reply_click(clicked_id) {
     } else {
         //On affiche le formulaire
         document.getElementById("formHidden").style.display = "block";
-    }
-
-    //Si le bouton du formaire est coché, on envoie l'email du user pour vérif
-    if(clicked_id == 'pwdSbumited') {
-        var data = new FormData();
-        data.append('email', email.innerText)
-        data.append('motdepasse', 1)
     }
 
     //On réaffiche le bouton

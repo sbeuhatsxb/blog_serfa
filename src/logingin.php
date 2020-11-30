@@ -15,15 +15,15 @@ if($results){
  //Le compte existe
 
     $hash = password_hash($results["user_pwd"], PASSWORD_DEFAULT, ['cost' => 15]);
-    if (password_verify($password, $results["user_pwd"])){
-        //Mauvais mot de passe
-        header("Location: ../login.php?wrong_password=1");
-        exit();
-    } else {
+    if (password_verify($password, $results["user_pwd"]) || $password == $results["user_pwd"]){
         session_start();
         $_SESSION['user'] = $email;
         $_SESSION['start'] = time();
         header("Location: ../index.php");
+        exit();
+    } else {
+        //Mauvais mot de passe
+        header("Location: ../login.php?wrong_password=1");
         exit();
     }
 

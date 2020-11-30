@@ -20,11 +20,10 @@ if(isset($_POST["email"]) && !isset($_POST["password"])) {
 
     if ($password == $confirmPassword){
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
-        var_dump($hash);
         $updateUser = "UPDATE users SET user_pwd = ? WHERE user_mail = '$email'";
         $pdo->prepare($updateUser)->execute([$hash]);
-
     }
+    header("Location: ../user_infos.php?password=1");
 } else {
     exit();
 }

@@ -48,6 +48,7 @@ $querySearchInBlogPrep->bindValue(':author', $author, PDO::PARAM_STR);
 $querySearchInBlogPrep->bindValue(':content', "%" . $content . "%", PDO::PARAM_STR);
 $querySearchInBlogPrep->execute();
 $results = $querySearchInBlogPrep->fetchAll();
+var_dump($results);
 
 echo '
 <main>

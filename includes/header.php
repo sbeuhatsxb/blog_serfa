@@ -77,4 +77,12 @@ if($currentFile == "blog_serfa"){
             ?>
         </ul>
     </nav>
+    <?php if (isset($_SESSION["user"])) {
+    $userConnected = $_SESSION["user"];
+    echo '<p style="color: green">Bienvenue : ' . $userConnected . '</p>';
+    }
+    if (isset($_GET["user_created"])) {
+    $userCreated = $_GET["user_created"];
+    echo '<p style="color: green">Utilisateur créé : ' . $userCreated . '</p>';
+    } ?>
 </header>

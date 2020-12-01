@@ -80,6 +80,24 @@ function reply_click(clicked_id) {
             data.append('id', clicked_id)
         }
         //Sinon cela concerne le mot de passe
+
+        //Envoi des données à xhr
+        xhr.open('POST', 'src/update_user.php', true);
+        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+        xhr.send(data);
+
+        //Récupération des informations de la page distante
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    xhr.responseText; // contient le résultat de la page
+                    result.innerText = xhr.responseText;
+                    console.log(xhr.responseText);
+                } else {
+                    // Le serveur a renvoyé un status d'erreur
+                }
+            }
+        }
     } else {
         //On affiche le formulaire
         document.getElementById("formHidden").style.display = "block";
@@ -91,24 +109,4 @@ function reply_click(clicked_id) {
     //*********************************
     //****** Fin code spécifique ******
     //*********************************
-
-    //Envoi des données à xhr
-    xhr.open('POST', 'src/update_user.php', true);
-    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-    xhr.send(data);
-
-    //Récupération des informations de la page distante
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                xhr.responseText; // contient le résultat de la page
-                result.innerText = xhr.responseText;
-                console.log(xhr.responseText);
-            } else {
-                // Le serveur a renvoyé un status d'erreur
-            }
-        }
-    }
-
-
 }

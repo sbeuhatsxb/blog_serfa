@@ -1,3 +1,4 @@
+document.getElementById("period").style.display = "none";
 function changePeriod(){
     if (document.formSearch.period.value == 1){
         document.getElementById("uniquedate").style.display = "none";

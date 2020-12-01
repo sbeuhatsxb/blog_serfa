@@ -2,42 +2,54 @@
 window.addEventListener("DOMContentLoaded", (event) => {
     //On cache le formulaire de changement de mot de passe par défaut
     document.getElementById("formHidden").style.display = "none";
+    var result = document.getElementById("result");
 });
 
-function reply_click(clicked_id) {
-    var getHttpRequest = function () {
-        var httpRequest = false;
 
+var getHttpRequest = function () {
+    var httpRequest = false;
+
+    if (window.XMLHttpRequest) { // Mozilla, Safari,...
         httpRequest = new XMLHttpRequest();
         if (httpRequest.overrideMimeType) {
             httpRequest.overrideMimeType('text/xml');
         }
-
-        if (!httpRequest) {
-            alert('Abandon :( Impossible de créer une instance XMLHTTP');
-            return false;
+    }
+    else if (window.ActiveXObject) { // IE
+        try {
+            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
         }
-
-        return httpRequest;
+        catch (e) {
+            try {
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) {}
+        }
     }
 
+    if (!httpRequest) {
+        alert('Abandon :( Impossible de créer une instance XMLHTTP');
+        return false;
+    }
+
+    return httpRequest
+}
+
+
+
+
+function reply_click(clicked_id) {
+    //Préparation HttpRequest
     var xhr = getHttpRequest();
     xhr.open('GET', 'src/update_user.php', true);
-    // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
+    // On envoie un header pour indiquer au serveur que la page est appellée en Ajax
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     // On lance la requête
     xhr.send();
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                xhr.responseText; // contient le résultat de la page
-                console.log(xhr.responseText);
-            } else {
-                // Le serveur a renvoyé un status d'erreur
-            }
-        }
-    }
+    //*****************************
+    //****** Code spécifique ******
+    //*****************************
 
     //On récupère l'id du bouton sur lequel on a cliqué
     var id = document.getElementById(clicked_id);
@@ -52,7 +64,7 @@ function reply_click(clicked_id) {
     if (clicked_id == 'hash'){
         var data = new FormData();
         data.append('hash', 1)
-    //Si le bouton n'est pas celui du mot de passe :
+        //Si le bouton n'est pas celui du mot de passe :
     } else if (clicked_id != 'pwd') {
         //On demande à l'utilisateur sa nouvelle valeur
         var newname = prompt("Nouvelle valeur");
@@ -76,9 +88,27 @@ function reply_click(clicked_id) {
     //On réaffiche le bouton
     id.style.display = "unset";
 
-    var xhr = getHttpRequest();
+    //*********************************
+    //****** Fin code spécifique ******
+    //*********************************
+
+    //Envoi des données à xhr
     xhr.open('POST', 'src/update_user.php', true);
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     xhr.send(data);
-}
 
+    //Récupération des informations de la page distante
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                xhr.responseText; // contient le résultat de la page
+                result.innerText = xhr.responseText;
+                console.log(xhr.responseText);
+            } else {
+                // Le serveur a renvoyé un status d'erreur
+            }
+        }
+    }
+
+
+}

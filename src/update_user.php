@@ -1,7 +1,6 @@
 <?php
-include "../includes/header.php";
+session_start();
 include "sql_queries.php";
-
 
 if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
 
@@ -20,14 +19,11 @@ if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
             $hash = password_hash($recordedPassword, PASSWORD_DEFAULT, ['cost' => 10]);
             $updateUser = "UPDATE users SET user_pwd = ?, hashed = ? WHERE user_mail = '$email'";
             $pdo->prepare($updateUser)->execute([$hash, 1]);
-            echo "<div>Le mot de passe est haché'</div>";
+            echo "Le mot de passe est haché";
         } else {
-            echo "<div>'Le mot de passe est déjà haché'</div>";
+            echo "Le mot de passe est déjà haché";
         }
     }
-
-
-
 }
 
 if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["hash"])) {
@@ -38,7 +34,7 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
     $updateUser = "UPDATE users SET $field = ? WHERE user_mail = '$email'";
 
     $pdo->prepare($updateUser)->execute([$value]);
-    echo "<p>'Information mise à jour'</p>";
+    echo "Information mise à jour";
 } elseif (isset($_POST["password"]) && isset($_SESSION["user"])) {
 
     //Comparaison des deux mots de passes saisis

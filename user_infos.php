@@ -28,6 +28,7 @@ if (isset($_SESSION["user"])) {
     echo '
 <main>
     <section>
+    <p id="result" style="color: green"></p>
         <table>
             <tbody>
                 <tr>

@@ -4,14 +4,22 @@ include "src/sql_queries.php";
 
 //Récupération de tous les articles
 $queryBlogPrep = $pdo->prepare($queryBlog);
-$queryBlogPrep->execute();
-$results = $queryBlogPrep->fetchAll();
+try {
+    $queryBlogPrep->execute();
+    $results = $queryBlogPrep->fetchAll();
+} catch (PDOException $e) {
+    echo 'Échec lors de la connexion : ' . $e->getMessage();
+}
+
 
 //Récupération de tous les users pour les options du formulaire
 $queryUsersPrep = $pdo->prepare($queryUsers);
-$queryUsersPrep->execute();
-$userResults = $queryUsersPrep->fetchAll();
-
+try {
+    $queryUsersPrep->execute();
+    $userResults = $queryUsersPrep->fetchAll();
+} catch (PDOException $e) {
+    echo 'Échec lors de la connexion : ' . $e->getMessage();
+}
 ?>
 <main>
     <h2>Les articles</h2>

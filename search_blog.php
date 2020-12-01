@@ -13,7 +13,7 @@ if ($_POST["period"] == 1) {
     //Si l'une des des dates est remplie
     if (!empty($startdate) || !empty($enddate)) {
         //On continue la requête SQL
-        $querySearchInBlog .= ' AND article_createdate';
+        $querySearchInBlog .= ' OR article_createdate';
         //Si les deux dates sont renseignées
         if (!empty($startdate) && !empty($enddate)) {
             if (new DateTime($startdate) <= new DateTime($enddate)) {
@@ -38,7 +38,7 @@ if ($_POST["period"] == 1) {
     //Si la date seule est sélectionnée
 } else {
     $date = $_POST["date"];
-    $querySearchInBlog .= ' AND article_createdate = :date';
+    $querySearchInBlog .= ' OR article_createdate = :date';
     $querySearchInBlogPrep = $pdo->prepare($querySearchInBlog);
     $querySearchInBlogPrep->bindValue(':date', $date, PDO::PARAM_STR);
 
@@ -46,9 +46,12 @@ if ($_POST["period"] == 1) {
 
 $querySearchInBlogPrep->bindValue(':author', $author, PDO::PARAM_STR);
 $querySearchInBlogPrep->bindValue(':content', "%" . $content . "%", PDO::PARAM_STR);
-$querySearchInBlogPrep->execute();
-$results = $querySearchInBlogPrep->fetchAll();
-var_dump($results);
+try {
+    $querySearchInBlogPrep->execute();
+    $results = $querySearchInBlogPrep->fetchAll();
+} catch (PDOException $e) {
+    echo 'Échec lors de la connexion : ' . $e->getMessage();
+}
 
 echo '
 <main>

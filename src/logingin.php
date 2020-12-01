@@ -8,8 +8,13 @@ $queryEmail = " WHERE user_mail = :email";
 $queryUserEmail .= $queryEmail;
 $queryUserEmailPrep = $pdo->prepare($queryUserEmail);
 $queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
-$queryUserEmailPrep->execute();
-$results = $queryUserEmailPrep->fetch();
+try {
+    $queryUserEmailPrep->execute();
+    $results = $queryUserEmailPrep->fetch();
+} catch (PDOException $e) {
+    echo 'Échec lors de la connexion : ' . $e->getMessage();
+}
+
 if ($results) {
     //Comparation du mot de passe en clair de $_POST contre le hash enregistré en base
     if (password_verify($password, $results["user_pwd"]) || $password == $results["user_pwd"]) {

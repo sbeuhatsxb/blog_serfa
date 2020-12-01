@@ -7,8 +7,12 @@ if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
     $email = $_SESSION["user"];
     $queryGetUserPwdPrep = $pdo->prepare($queryGetUserPwd);
     $queryGetUserPwdPrep->bindValue(':email', $email, PDO::PARAM_STR);
-    $queryGetUserPwdPrep->execute();
-    $results = $queryGetUserPwdPrep->fetch();
+    try {
+        $queryGetUserPwdPrep->execute();
+        $results = $queryGetUserPwdPrep->fetch();
+    } catch (PDOException $e) {
+        echo 'Échec lors de la connexion : ' . $e->getMessage();
+    }
 
     if (isset($results)){
         //Si le mot de passe n'est pas hashé

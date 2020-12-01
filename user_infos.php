@@ -22,8 +22,13 @@ if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
     $queryBlogPrep = $pdo->prepare($queryShowUser);
     $queryBlogPrep->bindValue(':email', $email, PDO::PARAM_STR);
-    $queryBlogPrep->execute();
-    $results = $queryBlogPrep->fetch();
+    try {
+        $queryBlogPrep->execute();
+        $results = $queryBlogPrep->fetch();
+    } catch (PDOException $e) {
+        echo 'Échec lors de la connexion : ' . $e->getMessage();
+    }
+
 
     echo '
 <main>

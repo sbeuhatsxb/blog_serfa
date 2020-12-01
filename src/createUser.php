@@ -16,12 +16,13 @@ $data = [
     'password' => $hash,
 ];
 
-if ($pdo->errorCode() == '00000') {
+try {
     $pdo->prepare($createUser)->execute($data);
     header("Location: ../index.php?user_created=" . $name);
-} else {
+} catch (PDOException $e) {
     print_r("Il y a eu un problème lors de l'enregistrement. Erreur " . $pdo->errorCode() . " | ");
-};
+}
+
 
 
 

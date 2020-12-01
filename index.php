@@ -8,8 +8,12 @@ $limit = " LIMIT :limit;";
 $queryBlog .= $limit;
 $queryBlogPrep = $pdo->prepare($queryBlog);
 $queryBlogPrep->bindValue(':limit', 4, PDO::PARAM_INT);
-$queryBlogPrep->execute();
-$results = $queryBlogPrep->fetchAll();
+try {
+    $queryBlogPrep->execute();
+    $results = $queryBlogPrep->fetchAll();
+} catch (PDOException $e) {
+    echo 'Échec lors de la connexion : ' . $e->getMessage();
+}
 
 ?>
 <main>

@@ -1,6 +1,6 @@
 <?php
 include "includes/header.php";
-include "src/sql_queries.php";
+require "src/sql_queries.php";
 
 //Récupération de tous les articles
 $queryBlogPrep = $pdo->prepare($queryBlog);

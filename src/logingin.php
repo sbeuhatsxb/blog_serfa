@@ -1,5 +1,5 @@
 <?php
-include "sql_queries.php";
+require "sql_queries.php";
 
 $email = $_POST["mail"];
 $password = $_POST["passwd"];

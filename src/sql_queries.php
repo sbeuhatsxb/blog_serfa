@@ -1,5 +1,5 @@
 <?php
-include 'bddConnect.php';
+require 'bddConnect.php';
 
 $queryBlog = 'SELECT * FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
 

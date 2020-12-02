@@ -1,5 +1,5 @@
 <?php
-include "sql_queries.php";
+require "sql_queries.php";
 
 $name = $_POST["name"];
 $firstname = $_POST["firstname"];

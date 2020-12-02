@@ -1,8 +1,7 @@
 <?php
 //namespace App;
-
 include "includes/header.php";
-include "src/sql_queries.php";
+require "src/sql_queries.php";
 
 $limit = " LIMIT :limit;";
 $queryBlog .= $limit;

@@ -1,6 +1,6 @@
 <?php
+require "sql_queries.php";
 session_start();
-include "sql_queries.php";
 
 if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
 

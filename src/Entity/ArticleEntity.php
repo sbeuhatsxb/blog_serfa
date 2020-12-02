@@ -10,6 +10,11 @@ class ArticleEntity
     private DateTime $createdAt;
 
 
+    function __construct() {
+        print "Dans le constructeur de BaseClass\n";
+    }
+
+    
     /**
      * @return string
      */

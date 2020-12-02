@@ -1,25 +1,7 @@
 <?php
 include "includes/header.php";
-require "src/sql_queries.php";
-
-//Récupération de tous les articles
-$queryBlogPrep = $pdo->prepare($queryBlog);
-try {
-    $queryBlogPrep->execute();
-    $results = $queryBlogPrep->fetchAll();
-} catch (PDOException $e) {
-    echo 'Échec lors de la connexion : ' . $e->getMessage();
-}
-
-
-//Récupération de tous les users pour les options du formulaire
-$queryUsersPrep = $pdo->prepare($queryUsers);
-try {
-    $queryUsersPrep->execute();
-    $userResults = $queryUsersPrep->fetchAll();
-} catch (PDOException $e) {
-    echo 'Échec lors de la connexion : ' . $e->getMessage();
-}
+require_once ("src/bddConnect.php");
+require_once("src/sql_queries.php");
 ?>
 <main>
     <h2>Les articles</h2>
@@ -42,6 +24,8 @@ try {
                 <label for="author">Auteur</label>
                 <select id="author" name="author">
                     <?php
+                    //Récupération de tous les users pour les options du formulaire
+                    $userResults = getQueryAllUser();
                     foreach ($userResults as $user) {
                         echo '<option value=' . $user["user_name"] . '>' . $user["user_name"] . '</option>';
                     }
@@ -52,11 +36,10 @@ try {
         </fieldset>
     </form>
     <?php
+    $results = getQueryBlog(false);
     include "includes/blogDisplay.php";
     ?>
-
 </main>
-
 <?php include "includes/footer.php" ?>
 <script src="assets/js/changePeriod.js"></script>
 </body>

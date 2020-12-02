@@ -1,20 +1,47 @@
 <?php
-require 'bddConnect.php';
+function getQueryBlog($limit = false){
+    $queryBlog = 'SELECT * FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
+    if($limit){
+        $limit = " LIMIT :limit;";
+        $queryBlog .= $limit;
+    }
+    $queryBlogPrep = pdo()->prepare($queryBlog);
+    $queryBlogPrep->bindValue(':limit', 4, PDO::PARAM_INT);
+    return tryQueryAll($queryBlogPrep);
+}
 
-$queryBlog = 'SELECT * FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
+function getQueryAllUser(){
+    $queryUsers = 'SELECT user_name FROM users';
+    $queryUsersPrep = pdo()->prepare($queryUsers);
+    return tryQueryAll($queryUsersPrep);
+}
 
-$querySearchInBlog = 'SELECT * FROM articles 
+function searchInBlog(){
+    return $querySearchInBlog = 'SELECT * FROM articles 
     INNER JOIN users ON articles.article_creator = users.user_id
      WHERE users.user_name = :author
      AND article_content LIKE :content
     ';
 
-$queryUsers = 'SELECT user_name FROM users';
+}
 
-$createUser = "INSERT INTO users (user_name, user_firstname, user_mail, user_pwd) VALUES (:name, :firstname, :email, :password)";
 
-$queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
 
-$queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 
-$queryGetUserPwd = 'SELECT user_pwd, hashed FROM users WHERE user_mail = :email';
+function tryQueryAll($query){
+    try {
+        $query->execute();
+        return $query->fetchAll();
+    } catch (PDOException $e) {
+        echo 'Échec lors de la connexion : ' . $e->getMessage();
+    }
+}
+
+function tryQuery($query){
+    try {
+        $query->execute();
+        return $query->fetch();
+    } catch (PDOException $e) {
+        echo 'Échec lors de la connexion : ' . $e->getMessage();
+    }
+}

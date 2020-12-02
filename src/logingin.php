@@ -1,12 +1,13 @@
 <?php
-require "sql_queries.php";
+require_once ("bddConnect.php");
+$queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
 
 $email = $_POST["mail"];
 $password = $_POST["passwd"];
 
 $queryEmail = " WHERE user_mail = :email";
 $queryUserEmail .= $queryEmail;
-$queryUserEmailPrep = $pdo->prepare($queryUserEmail);
+$queryUserEmailPrep = pdo()->prepare($queryUserEmail);
 $queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
 try {
     $queryUserEmailPrep->execute();

@@ -1,11 +1,13 @@
 <?php
-require "sql_queries.php";
+require_once ("bddConnect.php");
 session_start();
+
+$queryGetUserPwd = 'SELECT user_pwd, hashed FROM users WHERE user_mail = :email';
 
 if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
 
     $email = $_SESSION["user"];
-    $queryGetUserPwdPrep = $pdo->prepare($queryGetUserPwd);
+    $queryGetUserPwdPrep = pdo()->prepare($queryGetUserPwd);
     $queryGetUserPwdPrep->bindValue(':email', $email, PDO::PARAM_STR);
     try {
         $queryGetUserPwdPrep->execute();
@@ -23,7 +25,7 @@ if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
             $hash = password_hash($recordedPassword, PASSWORD_DEFAULT, ['cost' => 10]);
             $updateUser = "UPDATE users SET user_pwd = ?, hashed = ? WHERE user_mail = '$email'";
             try {
-                $pdo->prepare($updateUser)->execute([$hash, 1]);
+                pdo()->prepare($updateUser)->execute([$hash, 1]);
                 echo "Le mot de passe est haché";
             } catch (PDOException $e) {
                 echo 'Échec lors de la connexion : ' . $e->getMessage();
@@ -42,7 +44,7 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
     $updateUser = "UPDATE users SET $field = ? WHERE user_mail = '$email'";
 
     try {
-        $pdo->prepare($updateUser)->execute([$value]);
+        pdo()->prepare($updateUser)->execute([$value]);
         echo "Information mise à jour";
     } catch (PDOException $e) {
         echo 'Échec lors de la connexion : ' . $e->getMessage();
@@ -59,7 +61,7 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
         $updateUser = "UPDATE users SET user_pwd = ?, hashed = ? WHERE user_mail = '$email'";
 
         try {
-            $pdo->prepare($updateUser)->execute([$hash, 1]);
+            pdo()->prepare($updateUser)->execute([$hash, 1]);
             header("Location: ../user_infos.php?password=1");
             exit();
         } catch (PDOException $e) {

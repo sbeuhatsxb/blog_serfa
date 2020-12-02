@@ -1,5 +1,6 @@
 <?php
-require "sql_queries.php";
+require_once ("bddConnect.php");
+$createUser = "INSERT INTO users (user_name, user_firstname, user_mail, user_pwd) VALUES (:name, :firstname, :email, :password)";
 
 $name = $_POST["name"];
 $firstname = $_POST["firstname"];
@@ -17,10 +18,10 @@ $data = [
 ];
 
 try {
-    $pdo->prepare($createUser)->execute($data);
+    pdo()->prepare($createUser)->execute($data);
     header("Location: ../index.php?user_created=" . $name);
 } catch (PDOException $e) {
-    print_r("Il y a eu un problème lors de l'enregistrement. Erreur " . $pdo->errorCode() . " | ");
+    print_r("Il y a eu un problème lors de l'enregistrement. Erreur " . pdo()->errorCode() . " | ");
 }
 
 

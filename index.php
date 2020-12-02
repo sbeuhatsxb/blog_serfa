@@ -1,30 +1,7 @@
 <?php
-//namespace App;
-include "includes/header.php";
-require "src/sql_queries.php";
 
-$limit = " LIMIT :limit;";
-$queryBlog .= $limit;
-$queryBlogPrep = $pdo->prepare($queryBlog);
-$queryBlogPrep->bindValue(':limit', 4, PDO::PARAM_INT);
-try {
-    $queryBlogPrep->execute();
-    $results = $queryBlogPrep->fetchAll();
-} catch (PDOException $e) {
-    echo 'Échec lors de la connexion : ' . $e->getMessage();
-}
+define('__ROOT__', dirname(__FILE__));
+require ("src/bddConnect.php");
+require_once("src/sql_queries.php");
 
-?>
-<main>
-    <h2>Accueil</h2>
-    <p>Page affichant les 4 derniers articles</p>
-    <?php
-    include "includes/blogDisplay.php";
-    ?>
-
-</main>
-
-<?php include "includes/footer.php" ?>
-<script src="assets/js/crop.js"></script>
-</body>
-</html>
+require_once(__ROOT__.'/home.php');

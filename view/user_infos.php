@@ -1,6 +1,6 @@
 <?php
 include "includes/header.php";
-require_once ("src/bddConnect.php");
+require_once("src/bddConnect.php");
 
 $queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 if (isset($_GET["password"])) {
@@ -61,7 +61,7 @@ if (isset($_SESSION["user"])) {
         </table>
     </section>
     
-    <form action="src/update_user.php" name="formUpdate" method="post" id="formHidden">
+    <form action="../src/update_user.php" name="formUpdate" method="post" id="formHidden">
         <p>
             <label for="passwd">Nouveau mot de passe</label>
             <input type="password" name="password" id="password" />
@@ -81,6 +81,6 @@ if (isset($_SESSION["user"])) {
 }
 
 include "includes/footer.php" ?>
-<script src="assets/js/modifyUserInfos.js"></script>
+<script src="../assets/js/modifyUserInfos.js"></script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 <?php
 session_start();
 $currentFile = basename($_SERVER['REQUEST_URI']);
-
+$absolutePath = "/blog_serfa/";
 if($currentFile == "blog_serfa"){
     $currentFile = "index.php";
 } ?>
+
 <!DOCTYPE html>
 <html lang='fr'>
 <head>
@@ -30,12 +31,12 @@ if($currentFile == "blog_serfa"){
     echo "<title>BLOG - $title</title>";
     ?>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/styles/styles.css">
-    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link rel="stylesheet" href="/blog_serfa/assets/css/styles.css">
+    <link rel="icon" type="image/png" href="<?= $absolutePath ?>assets/images/logo.png" />
 </head>
 <body>
 <header >
-    <img id="logo" alt="logo" src="images/logo.png">
+    <img id="logo" alt="logo" src="<?= $absolutePath ?>assets/images/logo.png">
     <h1>Mon BLOG</h1>
     <div id="user">
 
@@ -46,7 +47,7 @@ if($currentFile == "blog_serfa"){
                 <a href="create_account.php" title="Créer un compte"><i class="fas fa-user-plus"></i></a>
             ';
         } else {
-            echo '<a href="src/disconnectUser.php" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>|';
+            echo '<a href='.$absolutePath.'assets/src/disconnectUser.php" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>|';
 
             echo '<a href="user_infos.php" title="Voir mon profil"><i class="fas fa-user"></i></a>';
         }
@@ -55,14 +56,14 @@ if($currentFile == "blog_serfa"){
 
     </div>
     <nav>
-        <img alt="burger_menu" src="images/burger.png" title="menu" />
+        <img alt="burger_menu" src="<?= $absolutePath ?>/assets/images/burger.png" title="menu" />
         <ul>
             <?php
             $menu = array(
-                array("index.php", "Page d'accueil", "Accueil"),
-                array("about.php", "A propos", "A propos"),
-                array("blog.php", "Blog", "Blog"),
-                array("contact.php", "Contact", "Contact")
+                array("/blog_serfa/index.php", "Page d'accueil", "Accueil"),
+                array("/blog_serfa/view/about.php", "A propos", "A propos"),
+                array("/blog_serfa/view/blog.php", "Blog", "Blog"),
+                array("/blog_serfa/view/contact.php", "Contact", "Contact")
             );
 
 

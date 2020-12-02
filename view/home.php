@@ -12,6 +12,6 @@ include "includes/header.php";
 </main>
 
 <?php include "includes/footer.php" ?>
-<script src="assets/js/crop.js"></script>
+<script src="../assets/js/crop.js"></script>
 </body>
 </html>

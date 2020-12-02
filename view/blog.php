@@ -1,7 +1,7 @@
 <?php
 include "includes/header.php";
-require_once ("src/bddConnect.php");
-require_once("src/sql_queries.php");
+require_once("../src/bddConnect.php");
+require_once("../src/sql_queries.php");
 ?>
 <main>
     <h2>Les articles</h2>
@@ -41,6 +41,6 @@ require_once("src/sql_queries.php");
     ?>
 </main>
 <?php include "includes/footer.php" ?>
-<script src="assets/js/changePeriod.js"></script>
+<script src="<?= $absolutePath ?>assets/js/changePeriod.js"></script>
 </body>
 </html>

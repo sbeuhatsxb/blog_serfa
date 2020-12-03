@@ -1,6 +1,6 @@
 <?php
 function getQueryBlog($limit = false){
-    $queryBlog = 'SELECT * FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
+    $queryBlog = 'SELECT article_img, article_title, article_createdate, CONCAT(user_name, " ", user_firstname) as user_creator, article_content FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
     if($limit){
         $limit = " LIMIT :limit;";
         $queryBlog .= $limit;

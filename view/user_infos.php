@@ -2,7 +2,7 @@
 include_once "includes/header.php";
 require ("../src/user_info_display.php");
 
-if($results){
+if(isset($results)){
     echo '
 <main>
     <section>

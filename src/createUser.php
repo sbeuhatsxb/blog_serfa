@@ -15,6 +15,7 @@ $data = [
     'firstname' => $firstname,
     'email' => $email,
     'password' => $hash,
+    'hash' => 1
 ];
 
 try {

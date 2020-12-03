@@ -85,7 +85,7 @@ function reply_click(clicked_id) {
         //On affiche le formulaire
         document.getElementById("formHidden").style.display = "block";
     }
-    
+
     //*********************************
     //****** Fin code spécifique ******
     //*********************************

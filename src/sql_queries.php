@@ -76,20 +76,20 @@ function getQueryAllUser(){
     return tryQueryAll($queryUsersPrep);
 }
 
-function tryQueryAll($query){
-    try {
-        $query->execute();
-        return $query->fetchAll();
-    } catch (PDOException $e) {
-        echo 'Échec lors de la connexion : ' . $e->getMessage();
-    }
-}
-
-function tryQuery($query){
-    try {
-        $query->execute();
-        return $query->fetch();
-    } catch (PDOException $e) {
-        echo 'Échec lors de la connexion : ' . $e->getMessage();
-    }
+//function tryQueryAll($query){
+//    try {
+//        $query->execute();
+//        return $query->fetchAll();
+//    } catch (PDOException $e) {
+//        echo 'Échec lors de la connexion : ' . $e->getMessage();
+//    }
+//}
+//
+//function tryQuery($query){
+//    try {
+//        $query->execute();
+//        return $query->fetch();
+//    } catch (PDOException $e) {
+//        echo 'Échec lors de la connexion : ' . $e->getMessage();
+//    }
 }

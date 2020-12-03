@@ -1,6 +1,6 @@
 <?php
 include_once ("includes/header.php");
-//use \Model\Manager\ArticleManager;
+use \Model\Manager\ArticleManager;
 require ("model/Manager/ArticleManager.php");
 
 ?>
@@ -11,6 +11,7 @@ require ("model/Manager/ArticleManager.php");
 //    $results = getQueryBlog(4);
     $results = new ArticleManager();
     $results->findAll(4);
+var_dump($results);
     include "includes/blogDisplay.php";
     ?>
 

@@ -4,16 +4,24 @@ use \Datetime;
 
 class ArticleEntity
 {
-    private int $id;
-    private string $title;
-    private string $img;
-    private string $content;
-    private UserEntity $author;
-    private DateTime $createdAt;
+    private $id;
+    private $title;
+    private $img;
+    private $content;
+    private $author;
+    private $createdAt;
 
 
     function __construct() {
-        print "Dans le constructeur de BaseClass\n";
+    }
+
+    public function hydrate($array){
+        $this->setId($array['article_id']);
+        $this->setTitle($array['article_title']);
+        $this->setImg($array['article_img']);
+        $this->setContent($array['article_content']);
+        $this->setAuthor($array['article_creator']);
+        $this->setCreatedAt($array['article_createdate']);
     }
 
     /**

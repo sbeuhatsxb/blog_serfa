@@ -3,11 +3,19 @@ namespace Model\Manager;
 use Model\Manager\BddAuth;
 use \PDO;
 
+/**
+ * Class ArticleManager
+ * @package Model\Manager
+ */
 class ArticleManager extends BddConnect
 {
+    /**
+     * @param null $limit
+     * @return mixed
+     */
     public function findAll($limit = NULL){
 
-        $queryBlog = 'SELECT article_img, article_title, article_createdate, CONCAT(user_name, " ", user_firstname) as user_creator, article_content FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
+        $queryBlog = 'SELECT article_id, article_img, article_title, article_createdate, CONCAT(user_name, " ", user_firstname) as article_creator, article_content FROM articles INNER JOIN users ON articles.article_creator = users.user_id ORDER BY articles.article_createdate DESC';
         $queryBlogPrep = $this->pdo->prepare($queryBlog);
         if($limit){
             $limit = " LIMIT :limit;";
@@ -17,6 +25,10 @@ class ArticleManager extends BddConnect
         return $this->tryQueryAll($queryBlogPrep);
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     function tryQueryAll($query){
         try {
             $query->execute();
@@ -26,6 +38,10 @@ class ArticleManager extends BddConnect
         }
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     function tryQuery($query)
     {
         try {

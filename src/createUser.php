@@ -1,6 +1,6 @@
 <?php
 require_once ("bddConnect.php");
-$createUser = "INSERT INTO users (user_name, user_firstname, user_mail, user_pwd) VALUES (:name, :firstname, :email, :password)";
+$createUser = "INSERT INTO users (user_name, user_firstname, user_mail, user_pwd, hashed) VALUES (:name, :firstname, :email, :password, :hash)";
 
 $name = $_POST["name"];
 $firstname = $_POST["firstname"];
@@ -18,9 +18,11 @@ $data = [
     'hash' => 1
 ];
 
+
+
 try {
     pdo()->prepare($createUser)->execute($data);
-    header("Location: ../index.php?user_created=" . $name);
+    header("Location: /blog_serfa/index.php?user_created=" . $name);
 } catch (PDOException $e) {
     print_r("Il y a eu un problème lors de l'enregistrement. Erreur " . pdo()->errorCode() . " | ");
 }

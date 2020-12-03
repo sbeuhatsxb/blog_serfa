@@ -1,6 +1,6 @@
 <?php
 include_once "includes/header.php";
-require_once ("../src/user_info_display.php");
+require ("../src/user_info_display.php");
 
 if($results){
     echo '
@@ -33,7 +33,7 @@ if($results){
         </table>
     </section>
     
-    <form action="../src/update_user.php" name="formUpdate" method="post" id="formHidden">
+    <form action="/blog_serfa/src/update_user.php" name="formUpdate" method="post" id="formHidden">
         <p>
             <label for="passwd">Nouveau mot de passe</label>
             <input type="password" name="password" id="password" />

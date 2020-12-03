@@ -42,7 +42,7 @@ if($currentFile == "blog_serfa"){
 
         <?php
         if(!isset($_SESSION["user"])){
-            echo '<a href="login.php" title="Se connecter"><i class="fas fa-sign-in-alt"></i></a>
+            echo '<a href="' . $absolutePath . 'view/login.php" title="Se connecter"><i class="fas fa-sign-in-alt"></i></a>
                 |
                 <a href="' . $absolutePath . 'view/create_account.php" title="Créer un compte"><i class="fas fa-user-plus"></i></a>
             ';
@@ -53,8 +53,6 @@ if($currentFile == "blog_serfa"){
 
         }
         ?>
-
-
     </div>
     <nav>
         <img alt="burger_menu" src="<?= $absolutePath ?>/assets/images/burger.png" title="menu" />
@@ -66,7 +64,7 @@ if($currentFile == "blog_serfa"){
                 array("/blog_serfa/view/blog.php", "Blog", "Blog"),
                 array("/blog_serfa/view/contact.php", "Contact", "Contact")
             );
-            
+
             foreach ($menu as $menuItem){
                 if(strpos($menuItem[0], $currentFile)){
                     echo '<li class="active"><a href='.$menuItem[0]." title=".$menuItem[1].">".$menuItem[2]."</a></li>";

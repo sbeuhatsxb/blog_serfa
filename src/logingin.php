@@ -9,6 +9,7 @@ $queryEmail = " WHERE user_mail = :email";
 $queryUserEmail .= $queryEmail;
 $queryUserEmailPrep = pdo()->prepare($queryUserEmail);
 $queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
+
 try {
     $queryUserEmailPrep->execute();
     $results = $queryUserEmailPrep->fetch();
@@ -22,14 +23,15 @@ if ($results) {
         session_start();
         $_SESSION['user'] = $email;
         $_SESSION['start'] = time();
-        header("Location: ../index.php");
+        header("Location: /blog_serfa/index.php");
         exit();
     } else {
         //Mauvais mot de passe
-        header("Location: ../login.php?wrong_password=1");
+        header("Location: ../view/login.php?wrong_password=1");
         exit();
     }
 
 } else {
-    header("Location: ../login.php?wrong_user=1");
+    header("Location: ../view/login.php?wrong_user=1");
 }
+

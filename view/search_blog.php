@@ -1,7 +1,7 @@
 <?php
 include_once "includes/header.php";
-require_once("src/search_in_blog.php");
-
+require_once("../src/sql_queries.php");
+$results = searchInBlog();
 echo '
 <main>
     <h2>Recherche</h2>

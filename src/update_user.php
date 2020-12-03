@@ -1,11 +1,11 @@
 <?php
 require_once ("bddConnect.php");
 session_start();
-
 $queryGetUserPwd = 'SELECT user_pwd, hashed FROM users WHERE user_mail = :email';
 
+//AJAX
+//HACHAGE MOT DE PASSE
 if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
-
     $email = $_SESSION["user"];
     $queryGetUserPwdPrep = pdo()->prepare($queryGetUserPwd);
     $queryGetUserPwdPrep->bindValue(':email', $email, PDO::PARAM_STR);
@@ -15,7 +15,6 @@ if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
     } catch (PDOException $e) {
         echo 'Échec lors de la connexion : ' . $e->getMessage();
     }
-
     if (isset($results)){
         //Si le mot de passe n'est pas hashé
         if($results["hashed"] == 0){
@@ -36,6 +35,7 @@ if (isset($_POST["hash"]) && $_POST["hash"] == 1) {
     }
 }
 
+//MISE A JOUR DES INFORMATIONS EN BDD A LA VOLEE
 if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["hash"])) {
     $value = $_POST["value"];
     $field = $_POST["id"];
@@ -62,17 +62,16 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
 
         try {
             pdo()->prepare($updateUser)->execute([$hash, 1]);
-            header("Location: ../user_infos.php?password=1");
+            header("Location: /blog_serfa/view/user_infos.php?password=1");
             exit();
         } catch (PDOException $e) {
             echo 'Échec lors de la connexion : ' . $e->getMessage();
         }
     } else {
-        header("Location: ../user_infos.php?password=0");
+        header("Location: /blog_serfa/view/user_infos.php?password=0");
         exit();
     }
 
 } else {
     exit();
 }
-

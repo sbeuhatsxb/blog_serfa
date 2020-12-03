@@ -35,13 +35,10 @@ var getHttpRequest = function () {
     return httpRequest
 }
 
-
-
-
 function reply_click(clicked_id) {
     //Préparation HttpRequest
     var xhr = getHttpRequest();
-    xhr.open('GET', 'src/update_user.php', true);
+    xhr.open('GET', '/blog_serfa/src/update_user.php', true);
     // On envoie un header pour indiquer au serveur que la page est appellée en Ajax
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     // On lance la requête
@@ -50,6 +47,7 @@ function reply_click(clicked_id) {
     //*****************************
     //****** Code spécifique ******
     //*****************************
+
 
     //On récupère l'id du bouton sur lequel on a cliqué
     var id = document.getElementById(clicked_id);
@@ -61,9 +59,12 @@ function reply_click(clicked_id) {
     //On fait disparaitre le bouton
     id.style.display = "none";
 
-    if (clicked_id == 'hash'){
+
+    //Préparation de data
+    if (clicked_id == 'hash') {
         var data = new FormData();
-        data.append('hash', 1)
+        data.append('hash', 1);
+
         //Si le bouton n'est pas celui du mot de passe :
     } else if (clicked_id != 'pwd') {
         //On demande à l'utilisateur sa nouvelle valeur
@@ -76,37 +77,38 @@ function reply_click(clicked_id) {
             id.innerText = "\xa0" + newname + "\xa0";
             //Et on prépare les données envoyées en POST pour le traitement en BDD
             var data = new FormData();
-            data.append('value', newname)
-            data.append('id', clicked_id)
-        }
-        //Sinon cela concerne le mot de passe
+            data.append('value', newname);
+            data.append('id', clicked_id);
 
-        //Envoi des données à xhr
-        xhr.open('POST', 'src/update_user.php', true);
-        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-        xhr.send(data);
-
-        //Récupération des informations de la page distante
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    xhr.responseText; // contient le résultat de la page
-                    result.innerText = xhr.responseText;
-                    console.log(xhr.responseText);
-                } else {
-                    // Le serveur a renvoyé un status d'erreur
-                }
-            }
         }
     } else {
         //On affiche le formulaire
         document.getElementById("formHidden").style.display = "block";
     }
+    
+    //*********************************
+    //****** Fin code spécifique ******
+    //*********************************
+
+    //Envoi des données à xhr
+    xhr.open('POST', '/blog_serfa/src/update_user.php', true);
+    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+    xhr.send(data);
+
+    //Récupération des informations de la page distante
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                xhr.responseText; // contient le résultat de la page
+                result.innerText = xhr.responseText;
+                console.log(xhr.responseText);
+            } else {
+                // Le serveur a renvoyé un status d'erreur
+            }
+        }
+    }
 
     //On réaffiche le bouton
     id.style.display = "unset";
 
-    //*********************************
-    //****** Fin code spécifique ******
-    //*********************************
 }

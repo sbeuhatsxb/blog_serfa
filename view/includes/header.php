@@ -44,12 +44,13 @@ if($currentFile == "blog_serfa"){
         if(!isset($_SESSION["user"])){
             echo '<a href="login.php" title="Se connecter"><i class="fas fa-sign-in-alt"></i></a>
                 |
-                <a href="create_account.php" title="Créer un compte"><i class="fas fa-user-plus"></i></a>
+                <a href="' . $absolutePath . 'view/create_account.php" title="Créer un compte"><i class="fas fa-user-plus"></i></a>
             ';
         } else {
-            echo '<a href='.$absolutePath.'assets/src/disconnectUser.php" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>|';
+            echo '<a href="' . $absolutePath . 'src/disconnectUser.php" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>|';
 
-            echo '<a href="user_infos.php" title="Voir mon profil"><i class="fas fa-user"></i></a>';
+            echo '<a href="'. $absolutePath . 'view/user_infos.php" title="Voir mon profil"><i class="fas fa-user"></i></a>';
+
         }
         ?>
 

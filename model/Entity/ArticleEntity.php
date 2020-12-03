@@ -1,12 +1,14 @@
 <?php
-namespace App\Entity;
+namespace Model\Entity;
 use \Datetime;
 
 class ArticleEntity
 {
+    private int $id;
     private string $title;
     private string $img;
     private string $content;
+    private UserEntity $author;
     private DateTime $createdAt;
 
 
@@ -14,7 +16,38 @@ class ArticleEntity
         print "Dans le constructeur de BaseClass\n";
     }
 
-    
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return UserEntity
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param UserEntity $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
     /**
      * @return string
      */

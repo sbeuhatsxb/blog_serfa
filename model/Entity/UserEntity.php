@@ -1,13 +1,31 @@
 <?php
-namespace App\Entity;
+namespace Model\Entity;
 
 
 class UserEntity
 {
+
+    private int $id;
     private string $name;
     private string $firstname;
     private string $mail;
     private string $password;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return string

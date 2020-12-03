@@ -1,5 +1,6 @@
 <?php
 foreach ($results as $result){
+    new \Model\Entity\ArticleEntity();
     echo "
         <article>
             <img alt=".$result["article_img"]." src=".$absolutePath."assets/images/".$result["article_img"].">

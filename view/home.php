@@ -2,9 +2,6 @@
 include_once ("includes/header.php");
 use \Model\Manager\ArticleManager;
 use \Model\Entity\ArticleEntity;
-
-
-
 ?>
 <main>
     <h2>Accueil</h2>

@@ -5,11 +5,15 @@ namespace Model\Entity;
 class UserEntity
 {
 
-    private int $id;
-    private string $name;
-    private string $firstname;
-    private string $mail;
-    private string $password;
+    private $id;
+    private $name;
+    private $firstname;
+    private $mail;
+    private $password;
+
+    public function hydrate($array){
+        $this->setName($array['user_name']);
+    }
 
     /**
      * @return int

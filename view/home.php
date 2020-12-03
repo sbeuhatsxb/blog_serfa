@@ -1,5 +1,5 @@
 <?php
-include "includes/header.php";
+include_once "includes/header.php";
 ?>
 <main>
     <h2>Accueil</h2>
@@ -12,6 +12,6 @@ include "includes/header.php";
 </main>
 
 <?php include "includes/footer.php" ?>
-<script src="../assets/js/crop.js"></script>
+<script src="/blog_serfa/assets/js/crop.js"></script>
 </body>
 </html>

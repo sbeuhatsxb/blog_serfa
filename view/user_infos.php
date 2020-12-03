@@ -1,6 +1,6 @@
 <?php
-include "includes/header.php";
-require ("../src/user_info_display.php");
+include_once "includes/header.php";
+require_once ("../src/user_info_display.php");
 
 if($results){
     echo '

@@ -1,4 +1,4 @@
-<?php include "includes/header.php"
+<?php include_once "includes/header.php"
 ?>
 <main>
     <h2>Contact</h2>

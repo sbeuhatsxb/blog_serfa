@@ -1,5 +1,5 @@
 <?php
-include "includes/header.php";
+include_once "includes/header.php";
 require_once("src/search_in_blog.php");
 
 echo '

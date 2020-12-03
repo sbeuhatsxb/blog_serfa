@@ -1,5 +1,5 @@
 <?php
-include "includes/header.php";
+include_once "includes/header.php";
 require_once("../src/bddConnect.php");
 require_once("../src/sql_queries.php");
 ?>

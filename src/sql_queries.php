@@ -25,9 +25,6 @@ function searchInBlog(){
 
 }
 
-
-
-
 function tryQueryAll($query){
     try {
         $query->execute();

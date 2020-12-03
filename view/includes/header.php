@@ -66,10 +66,9 @@ if($currentFile == "blog_serfa"){
                 array("/blog_serfa/view/blog.php", "Blog", "Blog"),
                 array("/blog_serfa/view/contact.php", "Contact", "Contact")
             );
-
-
+            
             foreach ($menu as $menuItem){
-                if($currentFile == $menuItem[0]){
+                if(strpos($menuItem[0], $currentFile)){
                     echo '<li class="active"><a href='.$menuItem[0]." title=".$menuItem[1].">".$menuItem[2]."</a></li>";
                 } else {
                     echo '<li><a href='.$menuItem[0]." title=".$menuItem[1].">".$menuItem[2]."</a></li>";

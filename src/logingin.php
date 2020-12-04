@@ -10,16 +10,17 @@ $email = $_POST["mail"];
 $password = $_POST["passwd"];
 
 $userManager = new UserManager();
-$userResults = $userManager->checkUserEmail($email);
+$userResults = $userManager->showUser($email);
 $user = new UserEntity();
 $user->hydrate($userResults);
 
-if (isset($user)) {
+if (isset($user) && !is_null($user)) {
     //Comparation du mot de passe en clair de $_POST contre le hash enregistré en base
     if (password_verify($password, $user->getPassword()) || $password == $user->getPassword()) {
         session_start();
-        $_SESSION['user'] = $email;
+        $_SESSION['user'] = $user->getMail();
         $_SESSION['start'] = time();
+        $_SESSION['userInfos'] = $user->getFirstname() . " " . $user->getName();
         header("Location: /blog_serfa/index.php");
         exit();
     } else {

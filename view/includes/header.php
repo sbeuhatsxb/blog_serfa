@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_GET["disconnected"])) {
+    session_start();
+}
 $currentFile = basename($_SERVER['REQUEST_URI']);
 $absolutePath = "/blog_serfa/";
 if($currentFile == "blog_serfa"){
@@ -27,6 +29,10 @@ if($currentFile == "blog_serfa"){
             $title = "Contact";
             break;
 
+    }
+    if (isset($_SESSION["userInfos"])) {
+        $userConnected = $_SESSION["userInfos"];
+        echo '<p style="color: green; text-align: right;">Bienvenue : ' . $userConnected . '</p>';
     }
     echo "<title>BLOG - $title</title>";
     ?>
@@ -76,10 +82,7 @@ if($currentFile == "blog_serfa"){
             ?>
         </ul>
     </nav>
-    <?php if (isset($_SESSION["user"])) {
-    $userConnected = $_SESSION["user"];
-    echo '<p style="color: green">Bienvenue : ' . $userConnected . '</p>';
-    }
+    <?php
     if (isset($_GET["user_created"])) {
     $userCreated = $_GET["user_created"];
     echo '<p style="color: green">Utilisateur créé : ' . $userCreated . '</p>';

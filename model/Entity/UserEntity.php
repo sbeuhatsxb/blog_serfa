@@ -16,7 +16,7 @@ class UserEntity
         empty($array['user_id']) ?: $this->setId($array['user_id']);
         empty($array['user_name']) ?: $this->setName($array['user_name']);
         empty($array['user_firstname']) ?: $this->setFirstname($array['user_firstname']);
-        empty($array['user_email']) ?: $this->setMail($array['user_email']);
+        empty($array['user_mail']) ?: $this->setMail($array['user_mail']);
         empty($array['user_pwd']) ?: $this->setPassword($array['user_pwd']);
         empty($array['user_hashed']) ?: $this->setHash($array['user_hashed']);
 

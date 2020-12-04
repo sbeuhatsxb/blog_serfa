@@ -16,8 +16,9 @@ $confPassword = $_POST["confirmPwd"];
 $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
 
 $userManager->createUser($name, $firstname, $email, $hash);
-
-
-
+session_start();
+$_SESSION['user'] = $email;
+$_SESSION['start'] = time();
+$_SESSION['userInfos'] = $firstname . " " . $name;
 
 

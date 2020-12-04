@@ -1,4 +1,5 @@
-<?php include_once "includes/header.php"
+<?php include_once "includes/header.php";
+session_destroy();
 ?>
 <main>
     <h2>Créer un compte</h2>

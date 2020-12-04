@@ -18,22 +18,12 @@ class UserManager extends BddConnect
         return $this->tryQueryAll($queryUsersPrep);
     }
 
-    public function checkUserEmail($email){
-        $queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
-
-        $queryEmail = " WHERE user_mail = :email";
-        $queryUserEmail .= $queryEmail;
-        $queryUserEmailPrep = $this->pdo->prepare($queryUserEmail);
-        $queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
-        return $this->tryQuery($queryUserEmailPrep);
-    }
-
     public function showUser($email){
-        $queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
+        $queryShowUser = 'SELECT user_mail, user_name, user_firstname, user_pwd FROM users WHERE user_mail = :email';
 
-        $queryBlogPrep = $this->pdo->prepare($queryShowUser);
-        $queryBlogPrep->bindValue(':email', $email, PDO::PARAM_STR);
-        return $this->tryQuery($queryBlogPrep);
+        $queryShowUserPrep = $this->pdo->prepare($queryShowUser);
+        $queryShowUserPrep->bindValue(':email', $email, PDO::PARAM_STR);
+        return $this->tryQuery($queryShowUserPrep);
     }
 
     public function getUserPassword($email){
@@ -45,7 +35,6 @@ class UserManager extends BddConnect
 
     public function updateUserInfosAjax($input, $field, $email){
         $updateUser = "UPDATE users SET $field = ? WHERE user_mail = '$email'";
-
         try {
             $this->pdo->prepare($updateUser)->execute([$input]);
             echo "Information mise à jour";
@@ -101,6 +90,9 @@ class UserManager extends BddConnect
 
         try {
             $this->pdo->prepare($createUser)->execute($data);
+            session_start();
+            $_SESSION['user'] = $name;
+            $_SESSION['start'] = time();
             header("Location: /blog_serfa/index.php?user_created=" . $name);
         } catch (PDOException $e) {
             print_r("Il y a eu un problème lors de l'enregistrement" . $e->getMessage);

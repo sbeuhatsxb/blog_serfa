@@ -65,6 +65,23 @@ function reply_click(clicked_id) {
         var data = new FormData();
         data.append('hash', 1);
 
+        //Envoi des données à xhr
+        xhr.open('POST', '/blog_serfa/src/update_user.php', true);
+        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+        xhr.send(data);
+
+        //Récupération des informations de la page distante
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    xhr.responseText; // contient le résultat de la page
+                    result.innerText = xhr.responseText;
+                    console.log(xhr.responseText);
+                } else {
+                    // Le serveur a renvoyé un status d'erreur
+                }
+            }
+        }
         //Si le bouton n'est pas celui du mot de passe :
     } else if (clicked_id != 'pwd') {
         //On demande à l'utilisateur sa nouvelle valeur
@@ -110,5 +127,9 @@ function reply_click(clicked_id) {
     //*********************************
     //On réaffiche le bouton
     id.style.display = "unset";
+
+
+
+
 
 }

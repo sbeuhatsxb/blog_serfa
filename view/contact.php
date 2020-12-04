@@ -20,7 +20,7 @@
                 <textarea required name="content" id="content"></textarea></p>
             <p><input required type="checkbox" name="rgpd" id="rgpd"/> <label for="rgpd">Accepter les conditions
                     RGPD</label></p>
-            <p><img id="captcha" src="../images/captcha.gif" alt="captcha"/></p>
+            <p><img id="captcha" src="../assets/images/captcha.gif" alt="captcha"/></p>
             <p><label for="captcha_txt">Saisir le texte ci-dessus</label><input required type="text" name="captcha"
                                                                                 id="captcha_txt"/></p>
             <p><input class="btn btn-primary" type="submit" value="Envoyer le message"/></p>

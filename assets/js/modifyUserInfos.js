@@ -79,9 +79,28 @@ function reply_click(clicked_id) {
             var data = new FormData();
             data.append('value', newname);
             data.append('id', clicked_id);
-
         }
+
+        //Envoi des données à xhr
+        xhr.open('POST', '/blog_serfa/src/update_user.php', true);
+        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+        xhr.send(data);
+
+        //Récupération des informations de la page distante
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    xhr.responseText; // contient le résultat de la page
+                    result.innerText = xhr.responseText;
+                    console.log(xhr.responseText);
+                } else {
+                    // Le serveur a renvoyé un status d'erreur
+                }
+            }
+        }
+
     } else {
+        //Reste id = pwd
         //On affiche le formulaire
         document.getElementById("formHidden").style.display = "block";
     }
@@ -89,25 +108,6 @@ function reply_click(clicked_id) {
     //*********************************
     //****** Fin code spécifique ******
     //*********************************
-
-    //Envoi des données à xhr
-    xhr.open('POST', '/blog_serfa/src/update_user.php', true);
-    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-    xhr.send(data);
-
-    //Récupération des informations de la page distante
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                xhr.responseText; // contient le résultat de la page
-                result.innerText = xhr.responseText;
-                console.log(xhr.responseText);
-            } else {
-                // Le serveur a renvoyé un status d'erreur
-            }
-        }
-    }
-
     //On réaffiche le bouton
     id.style.display = "unset";
 

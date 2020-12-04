@@ -15,11 +15,11 @@ if(isset($results)){
                 </tr>
                 <tr>
                     <th>Nom</th>
-                    <td><button id="user_name" onclick="reply_click(this.id)">&nbsp;' . $results["user_name"] . '&nbsp;</button></td>
+                    <td><button id="user_name" onclick="reply_click(this.id)">&nbsp;' . $user->getName() . '&nbsp;</button></td>
                 </tr>
                 <tr>
                     <th>Prenom</th>
-                    <td><button id="user_firstname" onclick="reply_click(this.id)">&nbsp;' . $results["user_firstname"] . '&nbsp;</button></td>
+                    <td><button id="user_firstname" onclick="reply_click(this.id)">&nbsp;' . $user->getFirstname() . '&nbsp;</button></td>
                 </tr>
                 <tr>
                     <th>Hacher le mot de passe</th>

@@ -13,12 +13,12 @@ class UserEntity
     private $hash;
 
     public function hydrate($array){
-        $this->setId($array['user_id']);
-        $this->setName($array['user_name']);
-        $this->setFirstname($array['user_firstname']);
-        $this->setMail($array['user_email']);
-        $this->setPassword($array['user_pwd']);
-        $this->setHash($array['user_hashed']);
+        empty($array['user_id']) ?: $this->setId($array['user_id']);
+        empty($array['user_name']) ?: $this->setName($array['user_name']);
+        empty($array['user_firstname']) ?: $this->setFirstname($array['user_firstname']);
+        empty($array['user_email']) ?: $this->setMail($array['user_email']);
+        empty($array['user_pwd']) ?: $this->setPassword($array['user_pwd']);
+        empty($array['user_hashed']) ?: $this->setHash($array['user_hashed']);
 
     }
 

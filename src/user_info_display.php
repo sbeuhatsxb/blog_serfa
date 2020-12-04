@@ -1,5 +1,11 @@
 <?php
-require_once("../src/bddConnect.php");
+require_once ("../model/Manager/BddAuth.php");
+require_once ("../model/Manager/BddConnect.php");
+require ("../model/Manager/UserManager.php");
+require ("../model/Entity/UserEntity.php");
+use \Model\Manager\UserManager;
+use \Model\Entity\UserEntity;
+
 
 if (isset($_GET["password"])) {
     if ($_GET["password"] == 1) {
@@ -17,15 +23,10 @@ if (isset($_GET["hashed"])) {
     }
 }
 
-$queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
-    $queryBlogPrep = pdo()->prepare($queryShowUser);
-    $queryBlogPrep->bindValue(':email', $email, PDO::PARAM_STR);
-    try {
-        $queryBlogPrep->execute();
-        $results = $queryBlogPrep->fetch();
-    } catch (PDOException $e) {
-        echo 'Échec lors de la connexion : ' . $e->getMessage();
-    }
+    $userManager = new UserManager();
+    $results = $userManager->showUser($email);
+    $user = new UserEntity();
+    $user->hydrate($results);
 }

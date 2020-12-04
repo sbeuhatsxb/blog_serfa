@@ -1,7 +1,6 @@
 <?php
 require_once("../src/bddConnect.php");
 
-$queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 if (isset($_GET["password"])) {
     if ($_GET["password"] == 1) {
         echo '<p style="color: green">Le mot de passe a été modifié</p>';
@@ -18,6 +17,7 @@ if (isset($_GET["hashed"])) {
     }
 }
 
+$queryShowUser = 'SELECT user_name, user_firstname FROM users WHERE user_mail = :email';
 if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
     $queryBlogPrep = pdo()->prepare($queryShowUser);

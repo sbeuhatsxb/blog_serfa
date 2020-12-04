@@ -4,12 +4,8 @@ require_once ("../model/Manager/BddAuth.php");
 require_once ("../model/Manager/BddConnect.php");
 require ("../model/Manager/ArticleManager.php");
 require ("../model/Entity/ArticleEntity.php");
-require ("../model/Manager/UserManager.php");
-require ("../model/Entity/UserEntity.php");
 use \Model\Manager\ArticleManager;
-use \Model\Manager\UserManager;
 use \Model\Entity\ArticleEntity;
-use \Model\Entity\UserEntity;
 
 
 echo '

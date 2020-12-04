@@ -1,25 +1,22 @@
 <?php
-require_once ("bddConnect.php");
-$queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
+require_once ("../model/Manager/BddAuth.php");
+require_once ("../model/Manager/BddConnect.php");
+require ("../model/Manager/UserManager.php");
+require ("../model/Entity/UserEntity.php");
+use \Model\Manager\UserManager;
+use \Model\Entity\UserEntity;
 
 $email = $_POST["mail"];
 $password = $_POST["passwd"];
 
-$queryEmail = " WHERE user_mail = :email";
-$queryUserEmail .= $queryEmail;
-$queryUserEmailPrep = pdo()->prepare($queryUserEmail);
-$queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
+$userManager = new UserManager();
+$userResults = $userManager->checkUserEmail($email);
+$user = new UserEntity();
+$user->hydrate($userResults);
 
-try {
-    $queryUserEmailPrep->execute();
-    $results = $queryUserEmailPrep->fetch();
-} catch (PDOException $e) {
-    echo 'Échec lors de la connexion : ' . $e->getMessage();
-}
-
-if ($results) {
+if (isset($user)) {
     //Comparation du mot de passe en clair de $_POST contre le hash enregistré en base
-    if (password_verify($password, $results["user_pwd"]) || $password == $results["user_pwd"]) {
+    if (password_verify($password, $user->getPassword()) || $password == $user->getPassword()) {
         session_start();
         $_SESSION['user'] = $email;
         $_SESSION['start'] = time();

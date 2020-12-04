@@ -10,9 +10,16 @@ class UserEntity
     private $firstname;
     private $mail;
     private $password;
+    private $hash;
 
     public function hydrate($array){
+        $this->setId($array['user_id']);
         $this->setName($array['user_name']);
+        $this->setFirstname($array['user_firstname']);
+        $this->setMail($array['user_email']);
+        $this->setPassword($array['user_pwd']);
+        $this->setHash($array['user_hashed']);
+
     }
 
     /**
@@ -93,6 +100,22 @@ class UserEntity
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param mixed $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
     }
 
 }

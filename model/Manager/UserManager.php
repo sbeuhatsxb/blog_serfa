@@ -18,6 +18,16 @@ class UserManager extends BddConnect
         return $this->tryQueryAll($queryUsersPrep);
     }
 
+    public function checkUserEmail($email){
+        $queryUserEmail = 'SELECT user_mail, user_pwd FROM users';
+
+        $queryEmail = " WHERE user_mail = :email";
+        $queryUserEmail .= $queryEmail;
+        $queryUserEmailPrep = $this->pdo->prepare($queryUserEmail);
+        $queryUserEmailPrep->bindValue(':email', $email, PDO::PARAM_INT);
+        return $this->tryQuery($queryUserEmailPrep);
+    }
+
     /**
      * @param $query
      * @return mixed

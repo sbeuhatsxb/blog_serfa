@@ -46,7 +46,7 @@ if (isset($_SESSION["user"]) && !isset($_POST["password"]) && !isset($_POST["has
         $userManager->updatePasswordHash($email, $hash, true);
 
     } else {
-        header("Location: /blog_serfa/view/user_infos.php?password=0");
+        header("Location: /view/user_infos.php?password=0");
         exit();
     }
 

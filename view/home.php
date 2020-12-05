@@ -1,5 +1,4 @@
 <?php
-include_once ("includes/header.php");
 use \Model\Manager\ArticleManager;
 use \Model\Entity\ArticleEntity;
 ?>
@@ -18,7 +17,6 @@ use \Model\Entity\ArticleEntity;
     ?>
 </main>
 
-<?php include "includes/footer.php" ?>
-<script src="/blog_serfa/assets/js/crop.js"></script>
+<script src="/assets/js/crop.js"></script>
 </body>
 </html>

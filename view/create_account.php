@@ -1,5 +1,9 @@
-<?php include_once "includes/header.php";
-session_destroy();
+<?php
+if(isset($_SESSION)){
+    $_SESSION = array();
+    session_destroy();
+    unset($_SESSION);
+}
 ?>
 <main>
     <h2>Créer un compte</h2>
@@ -21,8 +25,6 @@ session_destroy();
     </form>
 
 </main>
-
-<?php include "includes/footer.php" ?>
 
 </body>
 </html>

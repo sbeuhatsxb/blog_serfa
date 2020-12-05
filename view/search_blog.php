@@ -1,12 +1,10 @@
 <?php
-include_once "includes/header.php";
 require_once ("../model/Manager/BddAuth.php");
 require_once ("../model/Manager/BddConnect.php");
 require ("../model/Manager/ArticleManager.php");
 require ("../model/Entity/ArticleEntity.php");
 use \Model\Manager\ArticleManager;
 use \Model\Entity\ArticleEntity;
-
 
 echo '
 <main>
@@ -21,7 +19,7 @@ foreach ($results as $result){
     include "includes/blogDisplay.php";
 }
 echo '</main>';
-include "includes/footer.php" ?>
+?>
 </body>
 </html>
 

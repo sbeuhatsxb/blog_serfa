@@ -57,7 +57,8 @@ class UserManager extends BddConnect
         } else {
             try {
                 $this->pdo->prepare($updateUser)->execute([$hash, 1]);
-                header("Location: /blog_serfa/view/user_infos.php?password=1");
+                $_SESSION = ["modified_password"];
+                header("Location: /user_infos");
                 exit();
             } catch (PDOException $e) {
                 echo 'Échec lors de la connexion : ' . $e->getMessage();
@@ -93,7 +94,7 @@ class UserManager extends BddConnect
             session_start();
             $_SESSION['user'] = $name;
             $_SESSION['start'] = time();
-            header("Location: /blog_serfa/index.php?user_created=" . $name);
+            header("Location: /index.php?user_created=" . $name);
         } catch (PDOException $e) {
             print_r("Il y a eu un problème lors de l'enregistrement" . $e->getMessage);
         }

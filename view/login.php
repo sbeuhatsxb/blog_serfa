@@ -1,5 +1,3 @@
-<?php include_once "includes/header.php"
-?>
 <main>
 
     <h2>Se connecter</h2>
@@ -19,9 +17,7 @@
     ?>
 
 </main>
-
-<?php include "includes/footer.php" ?>
-<script src="../assets/js/crop.js"></script>
+<script src="/assets/js/crop.js"></script>
 
 </body>
 </html>

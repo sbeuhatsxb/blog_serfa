@@ -1,16 +1,8 @@
 <?php
-include_once "includes/header.php";
-require_once ("../model/Manager/BddAuth.php");
-require_once ("../model/Manager/BddConnect.php");
-require ("../model/Manager/ArticleManager.php");
-require ("../model/Entity/ArticleEntity.php");
-require ("../model/Manager/UserManager.php");
-require ("../model/Entity/UserEntity.php");
 use \Model\Manager\ArticleManager;
 use \Model\Manager\UserManager;
 use \Model\Entity\ArticleEntity;
 use \Model\Entity\UserEntity;
-
 $articleManager = new ArticleManager();
 $results = $articleManager->findAll();
 
@@ -58,7 +50,6 @@ $results = $articleManager->findAll();
     }
     ?>
 </main>
-<?php include "includes/footer.php" ?>
-<script src="<?= $absolutePath ?>assets/js/changePeriod.js"></script>
+<script src="assets/js/changePeriod.js"></script>
 </body>
 </html>

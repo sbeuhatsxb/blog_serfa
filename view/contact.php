@@ -1,5 +1,3 @@
-<?php include_once "includes/header.php"
-?>
 <main>
     <h2>Contact</h2>
     <p>Page de contact</p>
@@ -31,7 +29,6 @@
                 allowfullscreen></iframe>
     </div>
 </main>
-<?php include "includes/footer.php" ?>
 <script>src = "assets/js/veriform.js</script>
 </body>
 </html>

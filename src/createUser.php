@@ -20,5 +20,3 @@ session_start();
 $_SESSION['user'] = $email;
 $_SESSION['start'] = time();
 $_SESSION['userInfos'] = $firstname . " " . $name;
-
-

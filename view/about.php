@@ -1,5 +1,3 @@
-<?php include_once "includes/header.php"
-?>
 <main>
     <h2>A propos</h2>
     <p>Page de contenu</p>
@@ -40,8 +38,5 @@
         Vivamus eget interdum sapien, consectetur eleifend odio. Nam sed faucibus risus, et faucibus lacus. Nulla
         facilisi.</p>
 </main>
-
-<?php include "includes/footer.php" ?>
-
 </body>
 </html>

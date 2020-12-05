@@ -1,6 +1,33 @@
 <?php
-include_once "includes/header.php";
-require ("../src/user_info_display.php");
+use \Model\Manager\UserManager;
+use \Model\Entity\UserEntity;
+
+
+if (isset($_SESSION["modified_password"])) {
+    if ($_SESSION["modified_password"]) {
+        echo '<p style="color: green">Le mot de passe a été modifié</p>';
+    } else {
+        echo '<p style="color: red">Les mots de passe ne correspondent pas</p>';
+    }
+}
+
+if (isset($_SESSION["hashed"])) {
+    if ($_SESSION["hashed"]) {
+        echo '<p style="color: green">Le mot de passe est haché</p>';
+    } else {
+        echo '<p style="color: red">Le mot de passe est déjà haché</p>';
+    }
+    $_SESSION["hashed"] = "";
+}
+
+if (isset($_SESSION["user"])) {
+    $email = $_SESSION["user"];
+    $userManager = new UserManager();
+    $results = $userManager->showUser($email);
+    $user = new UserEntity();
+    $user->hydrate($results);
+}
+
 
 if(isset($results)){
     echo '
@@ -33,7 +60,7 @@ if(isset($results)){
         </table>
     </section>
     
-    <form action="/blog_serfa/src/update_user.php" name="formUpdate" method="post" id="formHidden">
+    <form action="src/update_user.php" name="formUpdate" method="post" id="formHidden">
         <p>
             <label for="passwd">Nouveau mot de passe</label>
             <input type="password" name="password" id="password" />
@@ -51,8 +78,7 @@ if(isset($results)){
 } else {
     echo '<p>Veuillez vous connecter</p>';
 }
-
-include "includes/footer.php" ?>
-<script src="../assets/js/modifyUserInfos.js"></script>
+?>
+<script src="/assets/js/modifyUserInfos.js"></script>
 </body>
 </html>

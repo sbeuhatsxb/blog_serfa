@@ -8,4 +8,4 @@ $_SESSION = array();
 session_destroy();
 // Destruction du tableau de session
 unset($_SESSION);
-header("Location: ../index.php?disconnected=1");
+header("Location: /");

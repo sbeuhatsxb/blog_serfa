@@ -38,7 +38,7 @@ var getHttpRequest = function () {
 function reply_click(clicked_id) {
     //Préparation HttpRequest
     var xhr = getHttpRequest();
-    xhr.open('GET', '/blog_serfa/src/update_user.php', true);
+    xhr.open('GET', '/src/update_user.php', true);
     // On envoie un header pour indiquer au serveur que la page est appellée en Ajax
     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
     // On lance la requête
@@ -66,7 +66,7 @@ function reply_click(clicked_id) {
         data.append('hash', 1);
 
         //Envoi des données à xhr
-        xhr.open('POST', '/blog_serfa/src/update_user.php', true);
+        xhr.open('POST', '/src/update_user.php', true);
         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
         xhr.send(data);
 
@@ -99,7 +99,7 @@ function reply_click(clicked_id) {
         }
 
         //Envoi des données à xhr
-        xhr.open('POST', '/blog_serfa/src/update_user.php', true);
+        xhr.open('POST', '/src/update_user.php', true);
         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
         xhr.send(data);
 

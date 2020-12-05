@@ -21,15 +21,15 @@ if (isset($user) && !is_null($user)) {
         $_SESSION['user'] = $user->getMail();
         $_SESSION['start'] = time();
         $_SESSION['userInfos'] = $user->getFirstname() . " " . $user->getName();
-        header("Location: /blog_serfa/index.php");
+        header("Location: /");
         exit();
     } else {
         //Mauvais mot de passe
-        header("Location: ../view/login.php?wrong_password=1");
+        header("Location: /login.php?wrong_password=1");
         exit();
     }
 
 } else {
-    header("Location: ../view/login.php?wrong_user=1");
+    header("Location: /login.php?wrong_user=1");
 }
 

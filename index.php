@@ -20,7 +20,6 @@ switch ($uri) {
         require 'view/about.php';
         break;
     case "/blog":
-
         require 'view/blog.php';
         break;
     case "/contact":
@@ -31,6 +30,12 @@ switch ($uri) {
         break;
     case "/login":
         require 'view/login.php';
+        break;
+    case "/wrongPassword":
+        require 'view/wrongPassword.php';
+        break;
+    case "/wrongUser":
+        require 'view/wrongUser.php';
         break;
     case "/mentions":
         require 'view/mentions.php';

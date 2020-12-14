@@ -9,6 +9,7 @@ if (isset($_SESSION["modified_password"])) {
     } else {
         echo '<p style="color: red">Les mots de passe ne correspondent pas</p>';
     }
+    $_SESSION["hashed"] = "";
 }
 
 if (isset($_SESSION["hashed"])) {

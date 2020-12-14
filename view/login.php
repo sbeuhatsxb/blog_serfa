@@ -7,14 +7,6 @@
         <p><label for="passwd">Mot de passe</label><input type="password" name="passwd" id="passwd"/>
             <input type="submit" value="Me connecter"/>
     </form>
-    <?php
-    if (isset($_GET["wrong_password"])  && $_GET["wrong_password"] == 1) {
-        echo '<p style="color: red">Le mot de passe est incorrect</p>';
-    }
-    if (isset($_GET["wrong_user"]) && $_GET["wrong_user"] == 1) {
-        echo '<p style="color: red">Cet utilisateur n\'existe pas</p>';
-    }
-    ?>
 
 </main>
 <script src="/assets/js/crop.js"></script>
